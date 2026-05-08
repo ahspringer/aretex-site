@@ -8,3 +8,5 @@ cd c:/Users/sprin/Documents/Aretex Labs/aretex-site/aretex-site/site
 
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; npm run dev
 ```
+
+> Then open http://localhost:3000
