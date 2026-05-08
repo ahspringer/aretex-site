@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+/* ── Dark mode via .dark class on <html> ── */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ── Custom theme tokens ── */
+@theme {
+  --color-copper: #B45309;
+  --color-copper-light: #D97706;
+  --color-near-black: #0A0A0A;
+  --color-surface-dark: #111111;
+  --color-surface-dark-2: #1A1A1A;
+  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans);
+}
+
+/* ── Surface variables ── */
+:root {
+  --bg: #F9FAFB;
+  --fg: #111111;
+  --bg-card: #FFFFFF;
+  --border: #E5E7EB;
+}
+
+.dark {
+  --bg: #0A0A0A;
+  --fg: #F3F4F6;
+  --bg-card: #1A1A1A;
+  --border: #2A2A2A;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Focus rings ── */
+*:focus-visible {
+  outline: 2px solid #0D9488;
+  outline-offset: 2px;
+}

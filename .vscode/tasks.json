@@ -1,0 +1,36 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Steve: Generate Runtime Task Prompt",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\agent\\run-agent.ps1",
+        "-Task",
+        "${input:steveTaskRequest}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "steveTaskRequest",
+      "type": "promptString",
+      "description": "What should Steve do?",
+      "default": "Build the Hero and Navigation sections"
+    }
+  ]
+}

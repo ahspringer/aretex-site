@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; cd \"c:\\\\Users\\\\sprin\\\\Documents\\\\Aretex Labs\\\\aretex-site\\\\aretex-site\\\\site\"; npm run build 2>&1$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}
