@@ -104,7 +104,7 @@ export default function Technology() {
         >
           <div className="flex-1">
             <p className="text-sm font-semibold text-gray-900 dark:text-white">
-              Proprietary IP — Patent Pending
+              Proprietary IP — Patent Pending (App. No. 64/060,960)
             </p>
             <p className="text-xs text-gray-500 mt-1">
               The optical train design and sensor fusion methodology are the
@@ -113,7 +113,7 @@ export default function Technology() {
             </p>
           </div>
           <span className="shrink-0 text-xs font-mono text-teal-400 bg-teal-600/10 border border-teal-600/20 px-3 py-1 rounded-full whitespace-nowrap">
-            PATENT PENDING
+            APP. NO. 64/060,960
           </span>
         </motion.div>
       </motion.div>

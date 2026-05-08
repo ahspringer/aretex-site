@@ -139,7 +139,7 @@ export default function Hero() {
               variants={animate ? { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { delay: 0.6, duration: 0.5 } } } : {}}
             >
               <span className="text-xs font-mono text-gray-600 uppercase tracking-widest">
-                Alabama LLC · Stealth Mode · Patent Pending
+                Alabama LLC · Stealth Mode · Patent Pending · App. No. 64/060,960
               </span>
             </motion.div>
           </div>
