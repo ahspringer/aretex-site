@@ -24,12 +24,12 @@ const steps = [
     label: "Virtual Coaching",
     body: "Real-time visual feedback integrates ballistic solutions directly into your sight picture. Instant correction markers guide your hold and trigger timing, turning every shot into a deliberate training rep with immediate cognitive reinforcement.",
   },
-  {
-    number: "04",
-    icon: Activity,
-    label: "Training Analytics",
-    body: "Your session data syncs to the companion app, where you receive customized training insights. Analyze pre-shot stability trends, track accuracy relative to environmental compensation, and review detailed performance metrics to accelerate skill development.",
-  },
+  // {
+  //   number: "04",
+  //   icon: Activity,
+  //   label: "Training Analytics",
+  //   body: "Your session data syncs to the companion app, where you receive customized training insights. Analyze pre-shot stability trends, track accuracy relative to environmental compensation, and review detailed performance metrics to accelerate skill development.",
+  // },
 ];
 
 export default function Technology() {
@@ -51,7 +51,7 @@ export default function Technology() {
             How It Works
           </p>
           <h2 className="text-4xl md:text-5xl font-extrabold text-white leading-tight tracking-tight">
-            Four components.{" "}
+            Three components.{" "}
             <span className="text-gray-500">
               One complete system.
             </span>

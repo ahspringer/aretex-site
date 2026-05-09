@@ -64,12 +64,11 @@ export default function Contact() {
             Contact
           </p>
           <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight tracking-tight">
-            Join the mission.
+            Get in touch.
           </h2>
           <p className="mt-6 text-base text-gray-600 dark:text-gray-400 leading-relaxed">
-            Whether you are an investor, a potential customer, or a serious
-            marksman who wants early access — we want to hear from you. We
-            respond to every inquiry within 48 hours.
+            Have a question or want to connect? Reach out to us and we'll get back
+            to you as soon as possible.
           </p>
         </motion.div>
 
@@ -189,13 +188,13 @@ export default function Contact() {
                   />
                 </div>
                 <FormInput
-                  label="Affiliation (optional)"
-                  placeholder="Fund name, organization, or independent"
+                  label="Organization (optional)"
+                  placeholder="Company or organization name"
                   {...register("affiliation")}
                 />
                 <FormTextarea
                   label="Message (optional)"
-                  placeholder="Tell us what you are looking for — investor inquiry, early access, partnership..."
+                  placeholder="Tell us how we can help..."
                   {...register("message")}
                 />
                 {submitError && (
@@ -208,7 +207,7 @@ export default function Contact() {
                   loading={isSubmitting}
                   className="w-full sm:w-auto"
                 >
-                  Request Investor Access
+                  Send Message
                 </Button>
                 <p className="text-xs text-gray-500">
                   We respond within 48 hours.
