@@ -7,6 +7,7 @@ const investorSchema = z.object({
   name: z.string().min(2),
   email: z.string().email(),
   affiliation: z.string().optional(),
+  investorType: z.string().optional(),
   message: z.string().optional(),
 });
 
@@ -65,6 +66,7 @@ export async function POST(request: NextRequest) {
               `Name: ${data.name}`,
               `Email: ${data.email}`,
               `Affiliation: ${data.affiliation ?? "(none)"}`,
+              `Investor Type: ${data.investorType ?? "(none)"}`,
               `Message:\n${data.message ?? "(none)"}`,
             ].join("\n")
           : [`Type: Presale Signup`, `Email: ${data.email}`].join("\n");

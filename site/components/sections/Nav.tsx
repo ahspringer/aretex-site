@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon } from "lucide-react";
-import { useTheme } from "@/components/ThemeProvider";
+import { Menu, X } from "lucide-react";
 import Button from "@/components/ui/Button";
 
 const navLinks = [
@@ -18,7 +17,6 @@ const navLinks = [
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { theme, toggle } = useTheme();
 
   useEffect(() => {
     function onScroll() {
@@ -72,13 +70,6 @@ export default function Nav() {
 
           {/* Right controls */}
           <div className="hidden md:flex items-center gap-3">
-            <button
-              onClick={toggle}
-              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              className="p-2 text-gray-400 hover:text-white transition-colors duration-200"
-            >
-              {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
-            </button>
             <Button
               variant="outline"
               size="sm"
@@ -90,13 +81,6 @@ export default function Nav() {
 
           {/* Mobile menu button */}
           <div className="flex items-center gap-3 md:hidden">
-            <button
-              onClick={toggle}
-              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              className="p-2 text-gray-400 hover:text-white transition-colors duration-200"
-            >
-              {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
-            </button>
             <button
               onClick={() => setMobileOpen((o) => !o)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}

@@ -122,9 +122,9 @@ export default function Contact() {
             </div>
 
             <div className="border-t border-gray-200 dark:border-gray-800 pt-6">
-              <p className="text-xs font-mono text-gray-500 uppercase tracking-wider mb-3">
+              {/* <p className="text-xs font-mono text-gray-500 uppercase tracking-wider mb-3">
                 Location
-              </p>
+              </p> */}
               <p className="text-sm text-gray-900 dark:text-gray-300">
                 Aretex Labs, LLC
               </p>
@@ -211,7 +211,7 @@ export default function Contact() {
                   Request Investor Access
                 </Button>
                 <p className="text-xs text-gray-500">
-                  We respond within 48 hours. No spam. Ever.
+                  We respond within 48 hours.
                 </p>
               </form>
             )}

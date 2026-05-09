@@ -84,7 +84,7 @@ export default function Hero() {
               animate="visible"
               variants={animate ? { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.4 } } } : {}}
             >
-              <Badge variant="copper">Pre-Sales Coming Soon</Badge>
+              <Badge variant="copper">Pre-Sales Coming Fall 2026</Badge>
             </motion.div>
 
             <motion.h1
@@ -228,7 +228,7 @@ export default function Hero() {
           )}
 
           <p className="text-xs text-gray-600">
-            No spam. Unsubscribe at any time.
+            Unsubscribe at any time.
           </p>
         </motion.div>
       </div>

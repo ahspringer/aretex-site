@@ -29,7 +29,7 @@ const features = [
     headline: "See what you'd see at a real range.",
     body: "A proprietary optical train delivers a bright, clear, high-contrast virtual reticle overlay through the rifle scope eyepiece. No external screen. No VR headset required for the shooter. The sight picture is natural — because it is your actual scope.",
     specs: ["120Hz refresh · High contrast virtual overlay", "Reticle simulation matches optic zero", "Target placement · Range distances up to 1000m+"],
-    image: "/images/hero-render.png",
+    image: "/images/render-cutout.png",
     imageAlt: "ZeroShot VR device showing the optical clarity of the virtual sight picture",
     flip: false,
   },

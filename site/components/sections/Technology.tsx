@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { Cpu, Eye, RefreshCw } from "lucide-react";
+import { Cpu, Eye, RefreshCw, Activity } from "lucide-react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { fadeUp, staggerContainer, viewportOptions } from "@/lib/motion";
 
@@ -21,8 +21,14 @@ const steps = [
   {
     number: "03",
     icon: RefreshCw,
-    label: "Optical Feedback Loop",
-    body: "Computed impacts are projected through the optical train directly into the shooter's sight picture. No headset. No secondary screen. The round's point of impact appears where it would appear on a real range — through your actual scope, in real time.",
+    label: "Virtual Coaching",
+    body: "Real-time visual feedback integrates ballistic solutions directly into your sight picture. Instant correction markers guide your hold and trigger timing, turning every shot into a deliberate training rep with immediate cognitive reinforcement.",
+  },
+  {
+    number: "04",
+    icon: Activity,
+    label: "Training Analytics",
+    body: "Your session data syncs to the companion app, where you receive customized training insights. Analyze pre-shot stability trends, track accuracy relative to environmental compensation, and review detailed performance metrics to accelerate skill development.",
   },
 ];
 
@@ -44,24 +50,25 @@ export default function Technology() {
           <p className="text-xs font-mono text-teal-500 uppercase tracking-widest mb-4">
             How It Works
           </p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight tracking-tight">
-            Three components.{" "}
-            <span className="text-gray-500 dark:text-gray-500">
-              One closed loop.
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white leading-tight tracking-tight">
+            Four components.{" "}
+            <span className="text-gray-500">
+              One complete system.
             </span>
           </h2>
-          <p className="mt-6 text-base text-gray-600 dark:text-gray-400 leading-relaxed">
-            ZeroShot VR is a self-contained system. Everything required to
-            deliver a high-fidelity training round is built into the attachment
-            — no external computer, no companion app required for core function.
+          <p className="mt-6 text-base text-gray-400 leading-relaxed">
+            ZeroShot VR delivers real-time ballistic feedback during live training.
+            Session data syncs to the companion app, where you receive customized
+            analytics—pre-shot stability trends, environmental compensation accuracy,
+            and actionable performance insights to accelerate skill development.
           </p>
         </motion.div>
 
         {/* Steps */}
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-12 relative">
+        <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-8 lg:gap-12 relative">
           {/* Connector line (desktop only) */}
           <div
-            className="hidden md:block absolute top-8 left-[calc(16.67%+1rem)] right-[calc(16.67%+1rem)] h-px bg-gradient-to-r from-transparent via-teal-600/30 to-transparent pointer-events-none"
+            className="hidden lg:block absolute top-8 left-[calc(12.5%+1rem)] right-[calc(12.5%+1rem)] h-px bg-gradient-to-r from-transparent via-teal-600/30 to-transparent pointer-events-none"
             aria-hidden="true"
           />
 
@@ -75,7 +82,7 @@ export default function Technology() {
               >
                 {/* Number + Icon */}
                 <div className="flex items-center gap-4">
-                  <span className="text-5xl font-extrabold font-mono text-teal-900/60 dark:text-teal-900/40 leading-none select-none">
+                  <span className="text-5xl font-extrabold font-mono text-teal-900/40 leading-none select-none">
                     {step.number}
                   </span>
                   <div className="w-10 h-10 rounded-full border border-teal-600/30 bg-teal-600/5 flex items-center justify-center shrink-0">
@@ -85,10 +92,10 @@ export default function Technology() {
 
                 {/* Copy */}
                 <div className="flex flex-col gap-2">
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                  <h3 className="text-lg font-bold text-white">
                     {step.label}
                   </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                  <p className="text-sm text-gray-400 leading-relaxed">
                     {step.body}
                   </p>
                 </div>
@@ -103,7 +110,7 @@ export default function Technology() {
           className="border border-teal-600/20 bg-teal-600/5 rounded-xl px-6 py-5 flex flex-col sm:flex-row sm:items-center gap-4"
         >
           <div className="flex-1">
-            <p className="text-sm font-semibold text-gray-900 dark:text-white">
+            <p className="text-sm font-semibold text-white">
               Proprietary IP — Patent Pending (App. No. 64/060,960)
             </p>
             <p className="text-xs text-gray-500 mt-1">

@@ -9,8 +9,8 @@ const founders = [
     name: "Alex Springer",
     initials: "AS",
     role: "Chief Executive Officer",
-    education: "B.S. Aerospace Engineering (UAH '19), M.S. Mechanical Engineering (UA '24)",
-    bio: "Experienced Technical Program Managers and Former U.S. Army Aviation Test Director. Has led multi-million-dollar weapon system programs and high-stakes engineering projects.",
+    education: "B.S. Aerospace Engineering (UAH '19)\tM.S. Mechanical Engineering (UA '24)",
+    bio: "Experienced Technical Program Manager and Former U.S. Army Aviation Test Director. Has led multi-million-dollar weapon system programs and engineering projects.",
     tag: "Systems Leadership",
   },
   {
@@ -26,7 +26,7 @@ const founders = [
     initials: "WI",
     role: "Chief of Engineering & Technology",
     education: "B.S. Aerospace Engineering (UAH '24)",
-    bio: "Army civilian engineer who led red team cybersecurity T&E and threat replication engineering. Sensor integration and systems architecture specialist.",
+    bio: "Army civilian engineer who led red team cybersecurity test programs and threat replication engineering. Sensor integration and systems architecture specialist.",
     tag: "Systems Architecture",
   },
 ];
