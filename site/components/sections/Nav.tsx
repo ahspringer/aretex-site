@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import Button from "@/components/ui/Button";
 
@@ -45,9 +46,18 @@ export default function Nav() {
           {/* Logo */}
           <a
             href="#"
-            className="flex items-center gap-2 focus-visible:outline-none"
+            className="flex items-center gap-2.5 focus-visible:outline-none"
             aria-label="Aretex Labs home"
           >
+            <Image
+              src="/images/logo-mark.png"
+              alt=""
+              width={247}
+              height={215}
+              priority
+              className="h-7 w-auto invert"
+              aria-hidden="true"
+            />
             <span className="text-white font-bold tracking-[0.2em] text-sm uppercase">
               ARETEX
               <span className="text-teal-400 mx-1">·</span>

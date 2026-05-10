@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
@@ -9,7 +9,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
 import { FormInput } from "@/components/ui/FormInput";
-import { heroHeadline, heroSubheadline, heroCta } from "@/lib/motion";
 
 const schema = z.object({
   email: z.string().email("Enter a valid email address"),
@@ -17,10 +16,23 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
+const TICKER_ITEMS = [
+  "SUB-MOA ACCURACY",
+  "G7 BALLISTICS",
+  "1000M+ RANGE",
+  "ANY CALIBER",
+  "ANY OPTIC",
+  "120HZ REFRESH",
+  "NO MODIFICATIONS",
+  "FULL ENVIRONMENTAL SIM",
+];
+
 export default function Hero() {
   const prefersReducedMotion = useReducedMotion();
+  const animate = !prefersReducedMotion;
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const emailRef = useRef<HTMLDivElement>(null);
 
   const {
     register,
@@ -29,9 +41,16 @@ export default function Hero() {
     reset,
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
-  function handleScroll(href: string) {
+  function scrollToId(href: string) {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: "smooth" });
+  }
+
+  function focusEmail() {
+    emailRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    setTimeout(() => {
+      emailRef.current?.querySelector("input")?.focus();
+    }, 400);
   }
 
   async function onSubmit(data: FormData) {
@@ -50,206 +69,264 @@ export default function Hero() {
     }
   }
 
-  const animate = !prefersReducedMotion;
-
   return (
     <section
       id="hero"
-      className="relative min-h-screen bg-near-black flex items-center overflow-hidden"
+      className="relative min-h-screen bg-near-black flex flex-col overflow-hidden"
       aria-label="Hero"
     >
       {/* Crosshair watermark background */}
       <div
-        className="absolute inset-0 opacity-[0.07] pointer-events-none"
+        className="absolute inset-0 opacity-[0.06] pointer-events-none"
         aria-hidden="true"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='70' stroke='%230D9488' stroke-width='0.75' fill='none'/%3E%3Ccircle cx='100' cy='100' r='35' stroke='%230D9488' stroke-width='0.75' fill='none'/%3E%3Ccircle cx='100' cy='100' r='3' fill='%230D9488'/%3E%3Cline x1='0' y1='100' x2='75' y2='100' stroke='%230D9488' stroke-width='0.75'/%3E%3Cline x1='125' y1='100' x2='200' y2='100' stroke='%230D9488' stroke-width='0.75'/%3E%3Cline x1='100' y1='0' x2='100' y2='75' stroke='%230D9488' stroke-width='0.75'/%3E%3Cline x1='100' y1='125' x2='100' y2='200' stroke='%230D9488' stroke-width='0.75'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Ccircle cx='110' cy='110' r='80' stroke='%230D9488' stroke-width='0.6' fill='none'/%3E%3Ccircle cx='110' cy='110' r='40' stroke='%230D9488' stroke-width='0.6' fill='none'/%3E%3Ccircle cx='110' cy='110' r='3' fill='%230D9488'/%3E%3Cline x1='0' y1='110' x2='80' y2='110' stroke='%230D9488' stroke-width='0.6'/%3E%3Cline x1='140' y1='110' x2='220' y2='110' stroke='%230D9488' stroke-width='0.6'/%3E%3Cline x1='110' y1='0' x2='110' y2='80' stroke='%230D9488' stroke-width='0.6'/%3E%3Cline x1='110' y1='140' x2='110' y2='220' stroke='%230D9488' stroke-width='0.6'/%3E%3C/svg%3E")`,
           backgroundRepeat: "repeat",
-          backgroundSize: "200px 200px",
+          backgroundSize: "220px 220px",
         }}
       />
 
-      {/* Teal glow top left */}
+      {/* Ambient glows */}
       <div
-        className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-teal-600/10 blur-3xl pointer-events-none"
+        className="absolute -top-48 -left-48 w-[40rem] h-[40rem] rounded-full bg-teal-600/[0.08] blur-3xl pointer-events-none"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute -bottom-48 -right-48 w-[36rem] h-[36rem] rounded-full bg-copper/[0.05] blur-3xl pointer-events-none"
         aria-hidden="true"
       />
 
-      <div className="relative max-w-6xl mx-auto px-6 md:px-12 lg:px-24 w-full pt-24 pb-16">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="relative flex-1 flex items-center max-w-7xl mx-auto px-6 md:px-10 lg:px-16 w-full pt-28 pb-10">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center w-full">
           {/* Left: Copy */}
-          <div className="flex flex-col gap-6 lg:gap-8">
+          <div className="lg:col-span-5 flex flex-col gap-7">
             <motion.div
-              initial={animate ? "hidden" : "visible"}
-              animate="visible"
-              variants={animate ? { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.4 } } } : {}}
+              initial={animate ? { opacity: 0 } : false}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
             >
-              <Badge variant="copper">Pre-Sales Coming Fall 2026</Badge>
+              <Badge variant="copper">Pre-Sales · Coming Soon</Badge>
             </motion.div>
 
-            <motion.h1
-              className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] tracking-tight"
-              initial={animate ? "hidden" : "visible"}
-              animate="visible"
-              variants={animate ? heroHeadline : {}}
-            >
-              No Range.{" "}
-              <span className="text-teal-400">No Ammo.</span>
-              <br />
-              No Compromise.
-            </motion.h1>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[0.95] tracking-tight">
+              <motion.span
+                className="block"
+                initial={animate ? { opacity: 0, y: 30 } : false}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.05 }}
+              >
+                No Range.
+              </motion.span>
+              <motion.span
+                className="block text-teal-400"
+                initial={animate ? { opacity: 0, y: 30 } : false}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.18 }}
+              >
+                No Ammo.
+              </motion.span>
+              <motion.span
+                className="block"
+                initial={animate ? { opacity: 0, y: 30 } : false}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.32 }}
+              >
+                No Compromise.
+              </motion.span>
+            </h1>
 
             <motion.p
               className="text-base md:text-lg text-gray-400 leading-relaxed max-w-xl"
-              initial={animate ? "hidden" : "visible"}
-              animate="visible"
-              variants={animate ? heroSubheadline : {}}
+              initial={animate ? { opacity: 0, y: 20 } : false}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
             >
-              ZeroShot VR attaches to any rifle scope with no modifications and
+              ZeroShot VR clips onto any rifle scope with no modifications and
               delivers sub-MOA-accurate ballistic simulation through your own
               optic. Any caliber. Any setup. Anywhere you train.
             </motion.p>
 
             <motion.div
-              className="flex flex-wrap items-center gap-4 pt-2"
-              initial={animate ? "hidden" : "visible"}
-              animate="visible"
-              variants={animate ? heroCta : {}}
+              className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-1"
+              initial={animate ? { opacity: 0, y: 20 } : false}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.65 }}
             >
-              <Button
-                variant="primary"
-                size="lg"
-                onClick={() => handleScroll("#product")}
-              >
-                See the Product
+              <Button variant="primary" size="lg" onClick={focusEmail}>
+                Get Early Access
               </Button>
-              <Button
-                variant="copper"
-                size="lg"
-                onClick={() => handleScroll("#investors")}
+              <button
+                type="button"
+                onClick={() => scrollToId("#investors")}
+                className="text-sm font-mono text-copper hover:text-copper-light tracking-wide transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-copper rounded"
               >
-                Invest in Aretex Labs
-              </Button>
+                Investor inquiry →
+              </button>
             </motion.div>
 
-            <motion.div
-              className="flex items-center gap-3 pt-2"
-              initial={animate ? "hidden" : "visible"}
-              animate="visible"
-              variants={animate ? { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { delay: 0.6, duration: 0.5 } } } : {}}
+            <motion.p
+              className="text-[10px] font-mono text-gray-600 uppercase tracking-[0.25em] pt-2"
+              initial={animate ? { opacity: 0 } : false}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.85 }}
             >
-              <span className="text-xs font-mono text-gray-600 uppercase tracking-widest">
-                Alabama LLC · Stealth Mode · Patent Pending · App. No. 64/060,960
-              </span>
-            </motion.div>
+              Alabama LLC · Stealth Mode · Patent Pending · App. No. 64/060,960
+            </motion.p>
           </div>
 
-          {/* Right: Product render */}
+          {/* Right: Product render with subtle tactical framing */}
           <motion.div
-            className="relative flex items-center justify-center"
-            initial={animate ? { opacity: 0, scale: 0.95 } : {}}
-            animate={animate ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            whileHover={animate ? { scale: 1.02 } : {}}
+            className="lg:col-span-7 relative"
+            initial={animate ? { opacity: 0, scale: 0.96 } : false}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
           >
-            <div className="relative w-full max-w-lg aspect-[4/3] rounded-xl overflow-hidden border border-white/5">
-              <Image
-                src="/images/hero-render.png"
-                alt="ZeroShot VR scope attachment mounted on a rifle in a dark studio environment"
-                fill
-                priority
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-              {/* Teal glow overlay */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-teal-900/20 to-transparent pointer-events-none" />
-            </div>
+            <div className="relative aspect-[4/3] w-full">
+              <div className="absolute inset-0 rounded-2xl overflow-hidden border border-white/[0.06]">
+                <Image
+                  src="/images/hero-render.png"
+                  alt="ZeroShot VR scope attachment mounted on a rifle in a dark studio environment"
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-near-black/60 via-transparent to-teal-900/15 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-near-black/40 pointer-events-none" />
+              </div>
 
-            {/* Floating spec badge */}
-            <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-sm border border-teal-600/30 rounded-md px-3 py-2">
-              <p className="text-xs font-mono text-teal-400 tracking-wider">
-                SUB-MOA ACCURACY
-              </p>
-              <p className="text-xs font-mono text-gray-500">
-                Any caliber · No modifications
-              </p>
+              {/* Corner brackets — clean tactical UI chrome */}
+              <CornerBracket position="top-left" />
+              <CornerBracket position="top-right" />
+              <CornerBracket position="bottom-left" />
+              <CornerBracket position="bottom-right" />
+
+              {/* Static spec badge — clearly a product spec callout, not live data */}
+              <div className="absolute bottom-5 left-5 bg-black/70 backdrop-blur-sm border border-teal-600/30 rounded-md px-3 py-2">
+                <p className="text-xs font-mono text-teal-400 tracking-[0.2em]">
+                  SUB-MOA · G7 BALLISTICS
+                </p>
+                <p className="text-[10px] font-mono text-gray-500 tracking-wider mt-0.5">
+                  Any caliber · Any optic · No modifications
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>
+      </div>
 
+      {/* Data ticker band */}
+      <div
+        className="relative border-y border-white/[0.06] bg-black/30 backdrop-blur-sm overflow-hidden"
+        aria-hidden="true"
+      >
+        <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-near-black to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-near-black to-transparent z-10 pointer-events-none" />
         <motion.div
-          className="w-full mt-10 border border-teal-600/20 rounded-xl p-6 md:p-8 bg-teal-600/[0.04] flex flex-col gap-4"
-          initial={animate ? "hidden" : "visible"}
-          animate="visible"
-          variants={animate ? { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { delay: 0.5, duration: 0.5, ease: "easeOut" } } } : {}}
+          className="flex gap-12 py-3 whitespace-nowrap will-change-transform"
+          animate={animate ? { x: ["0%", "-50%"] } : false}
+          transition={{ duration: 38, ease: "linear", repeat: Infinity }}
         >
-          <div>
-            <h3 className="text-lg font-bold text-white">
+          {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
+            <span
+              key={i}
+              className="flex items-center gap-12 text-xs font-mono tracking-[0.3em] text-gray-500"
+            >
+              <span className="text-teal-500">▸</span>
+              {item}
+            </span>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Email capture */}
+      <div className="relative max-w-7xl mx-auto px-6 md:px-10 lg:px-16 w-full py-10">
+        <motion.div
+          ref={emailRef}
+          className="border border-teal-600/20 rounded-xl p-6 md:p-7 bg-teal-600/[0.04] flex flex-col md:flex-row md:items-center gap-5 md:gap-8"
+          initial={animate ? { opacity: 0, y: 20 } : false}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.95 }}
+        >
+          <div className="flex-1 min-w-0">
+            <h3 className="text-base font-bold text-white">
               Don&apos;t miss the presale.
             </h3>
             <p className="text-sm text-gray-400 mt-1">
-              ZeroShot VR presales open to early subscribers first. Leave your
-              email and we will reach out before the public launch.
+              Early subscribers get first access before public launch.
             </p>
           </div>
 
-          {submitted ? (
-            <p className="text-sm font-mono text-teal-400">
-              You&apos;re on the list. We&apos;ll be in touch.
-            </p>
-          ) : (
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="flex flex-col md:flex-row gap-3"
-              noValidate
-            >
-              <div className="flex-1">
-                <FormInput
-                  label=""
-                  placeholder="your@email.com"
-                  type="email"
-                  aria-label="Email address for presale updates"
-                  error={errors.email?.message}
-                  {...register("email")}
-                />
-              </div>
-              <Button
-                type="submit"
-                variant="primary"
-                loading={isSubmitting}
-                className="shrink-0"
+          <div className="flex-1 min-w-0 max-w-xl w-full">
+            {submitted ? (
+              <p className="text-sm font-mono text-teal-400">
+                You&apos;re on the list. We&apos;ll be in touch.
+              </p>
+            ) : (
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="flex flex-col sm:flex-row gap-3"
+                noValidate
               >
-                Notify Me
-              </Button>
-            </form>
-          )}
-          {submitError && (
-            <p className="text-xs text-red-400">{submitError}</p>
-          )}
-
-          <p className="text-xs text-gray-600">
-            Unsubscribe at any time.
-          </p>
+                <div className="flex-1">
+                  <FormInput
+                    label=""
+                    placeholder="your@email.com"
+                    type="email"
+                    aria-label="Email address for presale updates"
+                    error={errors.email?.message}
+                    {...register("email")}
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  variant="primary"
+                  loading={isSubmitting}
+                  className="shrink-0"
+                >
+                  Notify Me
+                </Button>
+              </form>
+            )}
+            {submitError && (
+              <p className="text-xs text-red-400 mt-2">{submitError}</p>
+            )}
+          </div>
         </motion.div>
       </div>
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        initial={animate ? { opacity: 0 } : {}}
-        animate={animate ? { opacity: 1 } : {}}
-        transition={{ delay: 1, duration: 0.5 }}
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
+        initial={animate ? { opacity: 0 } : false}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.1, duration: 0.5 }}
         aria-hidden="true"
       >
-        <span className="text-xs font-mono text-gray-600 tracking-widest uppercase">
+        <span className="text-[10px] font-mono text-gray-600 tracking-[0.3em] uppercase">
           Scroll
         </span>
         <motion.div
-          className="w-px h-8 bg-gradient-to-b from-teal-500/60 to-transparent"
-          animate={animate ? { scaleY: [1, 0.4, 1] } : {}}
+          className="w-px h-7 bg-gradient-to-b from-teal-500/60 to-transparent"
+          animate={animate ? { scaleY: [1, 0.4, 1] } : false}
           transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
         />
       </motion.div>
     </section>
   );
+}
+
+function CornerBracket({
+  position,
+}: {
+  position: "top-left" | "top-right" | "bottom-left" | "bottom-right";
+}) {
+  const base = "absolute w-7 h-7 border-teal-400/45";
+  const map = {
+    "top-left": "top-3 left-3 border-t border-l",
+    "top-right": "top-3 right-3 border-t border-r",
+    "bottom-left": "bottom-3 left-3 border-b border-l",
+    "bottom-right": "bottom-3 right-3 border-b border-r",
+  };
+  return <div className={`${base} ${map[position]}`} aria-hidden="true" />;
 }

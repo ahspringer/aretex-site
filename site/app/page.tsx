@@ -7,6 +7,7 @@ import Team from "@/components/sections/Team";
 import Investors from "@/components/sections/Investors";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
+import SectionDivider from "@/components/ui/SectionDivider";
 
 export default function Home() {
   return (
@@ -14,11 +15,17 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+        <SectionDivider />
         <Problem />
+        <SectionDivider />
         <ProductDetail />
+        <SectionDivider />
         <Technology />
+        <SectionDivider />
         <Team />
+        <SectionDivider />
         <Investors />
+        <SectionDivider />
         <Contact />
       </main>
       <Footer />
