@@ -227,12 +227,6 @@ function SpecRow({
           key={spec}
           className="flex items-center gap-2 text-[11px] font-mono text-gray-400 tracking-wide"
         >
-          {i > 0 && (
-            <span
-              aria-hidden="true"
-              className="h-3 w-px bg-white/10 hidden sm:block"
-            />
-          )}
           <span className="inline-flex items-center gap-2">
             <span className="h-1 w-1 rounded-full bg-teal-400" aria-hidden="true" />
             {spec}

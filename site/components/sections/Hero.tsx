@@ -141,7 +141,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
-              ZeroShot VR clips onto any rifle scope with no modifications and
+              ZeroShot VR attaches to any rifle scope with no modifications and
               delivers sub-MOA-accurate ballistic simulation through your own
               optic. Any caliber. Any setup. Anywhere you train.
             </motion.p>
@@ -296,7 +296,7 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <motion.div
+      {/* <motion.div
         className="absolute bottom-4 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
         initial={animate ? { opacity: 0 } : false}
         animate={{ opacity: 1 }}
@@ -311,7 +311,7 @@ export default function Hero() {
           animate={animate ? { scaleY: [1, 0.4, 1] } : false}
           transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
         />
-      </motion.div>
+      </motion.div> */}
     </section>
   );
 }
