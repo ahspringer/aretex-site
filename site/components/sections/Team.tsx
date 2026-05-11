@@ -22,7 +22,7 @@ const founders: Founder[] = [
     role: "Chief Executive Officer",
     education: "B.S. Aerospace Engineering (UAH '19)\tM.S. Mechanical Engineering (UA '24)",
     bio: "Experienced Technical Program Manager and Former U.S. Army Aviation Test Director. Has led multi-million-dollar weapon system programs and engineering projects.",
-    tag: "Systems Leadership",
+    tag: "Vision & Strategy",
     image: "/images/alex-springer.jpg",
   },
   {
@@ -40,7 +40,7 @@ const founders: Founder[] = [
     role: "Chief of Engineering & Technology",
     education: "B.S. Aerospace Engineering (UAH '24)",
     bio: "Army civilian engineer who led red team cybersecurity test programs and threat replication engineering. Sensor integration and systems architecture specialist.",
-    tag: "Systems Architecture",
+    tag: "Technical Leadership",
   },
 ];
 
@@ -133,6 +133,104 @@ export default function Team() {
             </motion.article>
           ))}
         </div>
+
+        <motion.div
+          initial={animate ? "hidden" : "visible"}
+          whileInView="visible"
+          viewport={viewportOptions}
+          variants={animate ? fadeUp : {}}
+          className="mt-20 max-w-2xl"
+        >
+          <p className="text-xs font-mono text-teal-500 uppercase tracking-widest mb-4">
+            How we operate
+          </p>
+          <h3 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight tracking-tight">
+            The Aretex Code
+          </h3>
+          <p className="mt-6 text-base text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl">
+            These aren't statements on a wall. They're codified into our operating agreement, embedded in every decision we make, and tested in every meeting. They are how Aretex Labs stays precise.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={animate ? "hidden" : "visible"}
+          whileInView="visible"
+          viewport={viewportOptions}
+          variants={
+            animate
+              ? {
+                  hidden: {},
+                  visible: {
+                    transition: {
+                      delayChildren: 0.15,
+                      staggerChildren: 0.25,
+                    },
+                  },
+                }
+              : {}
+          }
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-4"
+        >
+          {[
+            {
+              number: "01",
+              title: "Excellence takes precedence over pride",
+              description: "We give and receive feedback with humility.",
+            },
+            {
+              number: "02",
+              title: "There is always a hidden option C",
+              description: "We question assumptions with creativity.",
+            },
+            {
+              number: "03",
+              title: "We make asymmetric bets",
+              description: "Once committed, we go all in.",
+            },
+            {
+              number: "04",
+              title: "We serve the human behind the technology",
+              description: "Not the technology itself.",
+            },
+            {
+              number: "05",
+              title: "Every dollar serves the mission",
+              description: "We optimize for results, not overhead.",
+            },
+          ].map((value) => (
+            <motion.div
+              key={value.number}
+              variants={
+                animate
+                  ? {
+                      hidden: { opacity: 0, y: 28 },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: { duration: 0.6, ease: "easeOut" },
+                      },
+                    }
+                  : {}
+              }
+              className="relative flex flex-col gap-4"
+            >
+              {/* Number */}
+              <span className="text-5xl font-extrabold font-mono text-teal-600/20 leading-none select-none tabular-nums">
+                {value.number}
+              </span>
+
+              {/* Copy */}
+              <div className="flex flex-col gap-3">
+                <h4 className="text-sm font-bold text-gray-900 dark:text-white leading-tight">
+                  {value.title}
+                </h4>
+                <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                  {value.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </motion.div>
     </SectionWrapper>
   );

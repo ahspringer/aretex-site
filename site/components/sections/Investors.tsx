@@ -159,7 +159,7 @@ export default function Investors() {
           {[
             { value: "$9.4B", label: "Gun accessories market (TAM)" },
             { value: "9.9M", label: "Active firearm enthusiasts (US)" },
-            { value: "Pre-Seed", label: "Current stage · Wait list open" },
+            { value: "Pre-Seed", label: "Don't miss out · Wait list open" },
           ].map((item) => (
             <div
               key={item.label}
@@ -310,9 +310,10 @@ export default function Investors() {
             </h3>
             <p className="mt-5 text-sm text-gray-400 leading-relaxed max-w-xl">
               Aretex Labs is currently focused on product development ahead of
-              our next funding round. Wait-list members are notified before the
-              round opens publicly and receive first access to the round
-              materials.
+              our next funding round. Wait-list members will be notified before the
+              round opens publicly. Early-access investors secure preferred terms and
+              priority allocation, with first look at all round materials before public
+              release.
             </p>
           </motion.div>
 
@@ -359,7 +360,7 @@ export default function Investors() {
                     <p className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-2">
                       Early-Access Wait List
                     </p>
-                    <h3 className="text-2xl font-bold text-white">Join the early-access list</h3>
+                    <h3 className="text-2xl font-bold text-white">Don't miss our next round</h3>
                     <p className="mt-2 text-sm text-gray-400 leading-relaxed">
                       Investors on the list get first look when our next round opens.
                     </p>
