@@ -9,6 +9,7 @@ import SectionWrapper from "@/components/ui/SectionWrapper";
 import Button from "@/components/ui/Button";
 import { FormInput, FormTextarea } from "@/components/ui/FormInput";
 import { fadeUp, staggerContainer, viewportOptions } from "@/lib/motion";
+import { submitContact } from "@/lib/contact";
 
 const investorSchema = z.object({
   name: z.string().min(2, "Enter your name"),
@@ -108,20 +109,12 @@ export default function Investors() {
     setSubmitError("");
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "investor", ...data }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Submission failed");
-      }
+      await submitContact({ type: "investor", ...data });
 
       setSubmitted(true);
       reset();
     } catch {
-      setSubmitError("Something went wrong. Please try again.");
+      setSubmitError("Form is unavailable right now. Please try again shortly.");
     }
   }
 
