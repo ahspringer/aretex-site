@@ -1,24 +1,40 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { fadeUp, staggerContainer, viewportOptions } from "@/lib/motion";
 
-const stats = [
+type Stat = {
+  prefix?: string;
+  from?: number;
+  to: number;
+  suffix?: string;
+  label: string;
+  detail: string;
+};
+
+const stats: Stat[] = [
   {
-    value: "$500+",
+    prefix: "$",
+    to: 500,
+    suffix: "+",
     label: "Average cost per range session",
     detail:
       "Travel, range fees, ammo, and a full day gone. Dedicated shooters absorb this cost repeatedly just to maintain proficiency.",
   },
   {
-    value: "<3%",
+    prefix: "<",
+    from: 12,
+    to: 3,
+    suffix: "%",
     label: "Of long-range shooters live within 30 min of a 1000m+ facility",
     detail:
       "Long-range rifle practice requires space most of the country simply does not have nearby. Distance is not an excuse — it is the reality.",
   },
   {
-    value: "72 hrs",
+    to: 72,
+    suffix: " hrs",
     label: "Time before motor memory begins to degrade",
     detail:
       "Precision marksmanship is a perishable skill. Without consistent repetition, the muscle memory built at the range erodes faster than most shooters realize.",
@@ -38,11 +54,7 @@ export default function Problem() {
         variants={animate ? staggerContainer : {}}
         className="flex flex-col gap-16"
       >
-        {/* Headline */}
-        <motion.div
-          variants={animate ? fadeUp : {}}
-          className="max-w-3xl"
-        >
+        <motion.div variants={animate ? fadeUp : {}} className="max-w-3xl">
           <p className="text-xs font-mono text-teal-500 uppercase tracking-widest mb-4">
             The Problem
           </p>
@@ -61,16 +73,21 @@ export default function Problem() {
           </p>
         </motion.div>
 
-        {/* Stat cards */}
         <div className="grid md:grid-cols-3 gap-6">
-          {stats.map((stat) => (
+          {stats.map((stat, i) => (
             <motion.div
-              key={stat.value}
+              key={i}
               variants={animate ? fadeUp : {}}
-              className="flex flex-col gap-3 p-6 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-surface-dark-2"
+              className="flex flex-col gap-3 p-6 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-surface-dark-2 hover:border-copper/40 transition-colors duration-300"
             >
-              <span className="text-4xl font-extrabold font-mono text-copper">
-                {stat.value}
+              <span className="text-4xl font-extrabold font-mono text-copper tabular-nums">
+                {stat.prefix}
+                <CountTo
+                  from={stat.from ?? 0}
+                  to={stat.to}
+                  enabled={animate}
+                />
+                {stat.suffix}
               </span>
               <p className="text-sm font-semibold text-gray-900 dark:text-white leading-snug">
                 {stat.label}
@@ -84,4 +101,37 @@ export default function Problem() {
       </motion.div>
     </SectionWrapper>
   );
+}
+
+function CountTo({
+  from,
+  to,
+  duration = 1.4,
+  enabled,
+}: {
+  from: number;
+  to: number;
+  duration?: number;
+  enabled: boolean;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.5 });
+  const [value, setValue] = useState(enabled ? from : to);
+
+  useEffect(() => {
+    if (!enabled || !inView) return;
+    let frameId: number;
+    let start: number | null = null;
+    const step = (ts: number) => {
+      if (start === null) start = ts;
+      const t = Math.min((ts - start) / (duration * 1000), 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      setValue(Math.round(from + (to - from) * eased));
+      if (t < 1) frameId = requestAnimationFrame(step);
+    };
+    frameId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frameId);
+  }, [enabled, inView, from, to, duration]);
+
+  return <span ref={ref}>{value}</span>;
 }

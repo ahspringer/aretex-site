@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -159,7 +159,7 @@ export default function Investors() {
           {[
             { value: "$9.4B", label: "Gun accessories market (TAM)" },
             { value: "9.9M", label: "Active firearm enthusiasts (US)" },
-            { value: "Pre-Seed", label: "Current stage · Raising now" },
+            { value: "Pre-Seed", label: "Don't miss out · Wait list open" },
           ].map((item) => (
             <div
               key={item.label}
@@ -176,43 +176,124 @@ export default function Investors() {
         </motion.div>
 
         {/* Milestone timeline */}
-        <motion.div variants={animate ? fadeUp : {}} className="flex flex-col gap-6">
-          <h3 className="text-lg font-bold text-white">
-            Development Roadmap
-          </h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {milestones.map((m) => (
-              <div
-                key={m.id}
-                className={`flex items-start gap-3 p-4 rounded-lg border ${
-                  m.status === "complete"
-                    ? "border-teal-600/30 bg-teal-600/5"
-                    : m.status === "active"
-                    ? "border-copper/30 bg-copper/5"
-                    : "border-white/5 bg-white/[0.02]"
-                }`}
-              >
-                <span
-                  className={`shrink-0 mt-0.5 w-2 h-2 rounded-full ${
-                    m.status === "complete"
-                      ? "bg-teal-400"
-                      : m.status === "active"
-                      ? "bg-copper animate-pulse"
-                      : "bg-gray-700"
-                  }`}
-                  aria-hidden="true"
-                />
-                <div className="flex flex-col gap-0.5">
-                  <span className="text-xs font-mono text-gray-500">
-                    {m.id}
-                  </span>
-                  <span className="text-sm font-semibold text-white leading-snug">
-                    {m.label}
-                  </span>
-                  <span className="text-xs text-gray-600">{m.date}</span>
-                </div>
-              </div>
-            ))}
+        <motion.div
+          variants={animate ? fadeUp : {}}
+          className="flex flex-col gap-8"
+        >
+          <div className="flex items-baseline justify-between flex-wrap gap-x-6 gap-y-3">
+            <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight">
+              Development Roadmap
+            </h3>
+            <div className="flex items-center gap-5 text-[10px] font-mono uppercase tracking-[0.2em]">
+              <span className="flex items-center gap-2 text-teal-400">
+                <span className="w-2 h-2 rounded-full bg-teal-400" />
+                Complete
+              </span>
+              <span className="flex items-center gap-2 text-copper-light">
+                <span className="w-2 h-2 rounded-full bg-copper animate-pulse" />
+                In Progress
+              </span>
+              <span className="flex items-center gap-2 text-gray-500">
+                <span className="w-2 h-2 rounded-full border border-gray-600" />
+                Upcoming
+              </span>
+            </div>
+          </div>
+
+          <div className="relative">
+            {(() => {
+              type Group = { status: string; items: typeof milestones };
+              const groups: Group[] = milestones.reduce<Group[]>((acc, m) => {
+                const last = acc[acc.length - 1];
+                if (last && last.status === m.status) {
+                  last.items.push(m);
+                } else {
+                  acc.push({ status: m.status, items: [m] });
+                }
+                return acc;
+              }, []);
+              return groups.map((group, gi) => (
+                <Fragment key={gi}>
+                  {gi > 0 && (
+                    <PhaseConnector
+                      gi={gi}
+                      fromStatus={groups[gi - 1].status}
+                      toStatus={group.status}
+                    />
+                  )}
+                  <div className={PHASE_INDENT_CLASS[gi] ?? ""}>
+                    {/* Phase header */}
+                    <div className="ml-7 mb-4 flex items-center gap-3">
+                      <span className="text-[10px] font-mono text-gray-500 tracking-[0.28em] uppercase">
+                        Phase 0{gi + 1}
+                      </span>
+                      <span className="h-px flex-1 bg-white/[0.06]" />
+                      <span
+                        className={`text-[10px] font-mono uppercase tracking-[0.22em] ${phaseHeaderColor(
+                          group.status
+                        )}`}
+                      >
+                        {PHASE_HEADER_TEXT[group.status]}
+                      </span>
+                    </div>
+
+                    {/* Milestones in this phase */}
+                    <ol>
+                      {group.items.map((m, i) => {
+                        const isFirst = i === 0;
+                        const isLast = i === group.items.length - 1;
+                        return (
+                          <li
+                            key={m.id}
+                            className="relative flex items-start gap-5 md:gap-7 pb-8 last:pb-0"
+                          >
+                            <div className="relative flex-shrink-0 w-4 mt-1">
+                              {!isFirst && (
+                                <span
+                                  aria-hidden="true"
+                                  className={`absolute left-1/2 -translate-x-1/2 -top-8 w-px h-8 ${railColor(
+                                    m.status
+                                  )}`}
+                                />
+                              )}
+                              {!isLast && (
+                                <span
+                                  aria-hidden="true"
+                                  className={`absolute left-1/2 -translate-x-1/2 top-4 w-px ${railColor(
+                                    m.status
+                                  )}`}
+                                  style={{ height: "calc(100% - 1rem)" }}
+                                />
+                              )}
+                              <MilestoneNode status={m.status} />
+                            </div>
+
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-3 mb-1.5 flex-wrap">
+                                <span
+                                  className={`text-[11px] font-mono font-semibold tracking-[0.18em] ${idColor(
+                                    m.type
+                                  )}`}
+                                >
+                                  {m.id}
+                                </span>
+                                <StatusPill status={m.status} />
+                              </div>
+                              <h4 className="text-base md:text-[17px] font-semibold text-white leading-snug">
+                                {m.label}
+                              </h4>
+                              <p className="mt-1 text-xs font-mono text-gray-500 tracking-wide">
+                                {m.date}
+                              </p>
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ol>
+                  </div>
+                </Fragment>
+              ));
+            })()}
           </div>
         </motion.div>
 
@@ -225,46 +306,15 @@ export default function Investors() {
               Investor Contact
             </p>
             <h3 className="text-2xl md:text-3xl font-extrabold text-white leading-tight tracking-tight">
-              Start a direct conversation with the founding team.
+              We&apos;re not actively raising — yet.
             </h3>
             <p className="mt-5 text-sm text-gray-400 leading-relaxed max-w-xl">
-              We are currently raising our pre-seed round and speaking with investors
-              who understand category creation, product-led hardware, and performance
-              markets. Share your fund profile and diligence focus and we will route
-              the conversation appropriately.
+              Aretex Labs is currently focused on product development ahead of
+              our next funding round. Wait-list members will be notified before the
+              round opens publicly. Early-access investors secure preferred terms and
+              priority allocation, with first look at all round materials before public
+              release.
             </p>
-
-            <div className="mt-8 grid sm:grid-cols-3 gap-4">
-              {[
-                {
-                  label: "Round",
-                  value: "Pre-Seed",
-                  detail: "Founder-led raise underway",
-                },
-                {
-                  label: "Focus",
-                  value: "Precision Shooting",
-                  detail: "Mission-critical enthusiast market",
-                },
-                {
-                  label: "Response",
-                  value: "Within 24 Hours",
-                  detail: "Direct founder follow-up",
-                },
-              ].map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-2xl border border-white/10 bg-black/20 px-4 py-5"
-                >
-                  <p className="text-[11px] font-mono uppercase tracking-[0.22em] text-gray-500">
-                    {item.label}
-                  </p>
-                  <p className="mt-2 text-sm font-semibold text-white">{item.value}</p>
-                  <p className="mt-1 text-xs text-gray-500 leading-relaxed">{item.detail}</p>
-                </div>
-              ))}
-            </div>
-
           </motion.div>
 
           <motion.div variants={animate ? fadeUp : {}}>
@@ -288,16 +338,16 @@ export default function Investors() {
                     </svg>
                   </div>
                   <p className="text-lg font-bold text-white">
-                    Investor inquiry received.
+                    You&apos;re on the list.
                   </p>
                   <p className="text-sm text-gray-400 max-w-sm">
-                    We will follow up directly with the appropriate materials within 24 hours.
+                    We&apos;ll reach out before the next round opens.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
                     className="text-xs text-teal-400 hover:underline mt-2"
                   >
-                    Send another inquiry
+                    Submit another
                   </button>
                 </div>
               ) : (
@@ -308,11 +358,11 @@ export default function Investors() {
                 >
                   <div>
                     <p className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-2">
-                      Private Investor Intake
+                      Early-Access Wait List
                     </p>
-                    <h3 className="text-2xl font-bold text-white">Request the investor brief</h3>
+                    <h3 className="text-2xl font-bold text-white">Don't miss our next round</h3>
                     <p className="mt-2 text-sm text-gray-400 leading-relaxed">
-                      Share enough context for us to prepare a relevant conversation.
+                      Investors on the list get first look when our next round opens.
                     </p>
                   </div>
 
@@ -350,8 +400,8 @@ export default function Investors() {
                   </div>
 
                   <FormTextarea
-                    label="Investment Context"
-                    placeholder="Tell us what you want to evaluate first: market thesis, prototype progress, go-to-market, patent position, or round structure."
+                    label="What You'd Want to Evaluate"
+                    placeholder="Optional — what would you want to look at when the round opens? Market thesis, prototype progress, patent position, etc."
                     error={errors.message?.message}
                     {...register("message")}
                   />
@@ -366,10 +416,10 @@ export default function Investors() {
                       loading={isSubmitting}
                       className="w-full sm:w-auto"
                     >
-                      Connect With The Founders
+                      Add Me to the List
                     </Button>
                     <p className="text-xs text-gray-500 leading-relaxed">
-                      Investor inquiries are reviewed directly by the team within 24 hours.
+                      We&apos;ll reach out before our next round opens.
                     </p>
                   </div>
                 </form>
@@ -398,5 +448,143 @@ export default function Investors() {
         />
       </motion.div>
     </SectionWrapper>
+  );
+}
+
+function MilestoneNode({ status }: { status: string }) {
+  if (status === "complete") {
+    return (
+      <span
+        aria-hidden="true"
+        className="block w-3.5 h-3.5 rounded-full bg-teal-400 ring-4 ring-teal-400/15 shadow-[0_0_10px_rgba(45,212,191,0.45)]"
+      />
+    );
+  }
+  if (status === "active") {
+    return (
+      <span aria-hidden="true" className="relative block w-3.5 h-3.5">
+        <span className="absolute inset-0 rounded-full bg-copper" />
+        <span className="absolute -inset-1 rounded-full border border-copper/50 animate-pulse" />
+        <span className="absolute -inset-2 rounded-full bg-copper/20 blur-sm animate-pulse" />
+      </span>
+    );
+  }
+  return (
+    <span
+      aria-hidden="true"
+      className="block w-3.5 h-3.5 rounded-full border border-gray-600 bg-near-black"
+    />
+  );
+}
+
+function StatusPill({ status }: { status: string }) {
+  if (status === "complete") {
+    return (
+      <span className="text-[9px] font-mono uppercase tracking-[0.22em] px-2 py-0.5 rounded-full border border-teal-500/30 bg-teal-500/10 text-teal-300">
+        Complete
+      </span>
+    );
+  }
+  if (status === "active") {
+    return (
+      <span className="inline-flex items-center gap-1.5 text-[9px] font-mono uppercase tracking-[0.22em] px-2 py-0.5 rounded-full border border-copper/40 bg-copper/10 text-copper-light">
+        <span className="w-1 h-1 rounded-full bg-copper animate-pulse" />
+        In Progress
+      </span>
+    );
+  }
+  return (
+    <span className="text-[9px] font-mono uppercase tracking-[0.22em] px-2 py-0.5 rounded-full border border-white/10 bg-white/[0.02] text-gray-500">
+      Upcoming
+    </span>
+  );
+}
+
+function idColor(type: string): string {
+  return type === "technical" ? "text-teal-400" : "text-copper-light";
+}
+
+const PHASE_INDENT_CLASS = ["", "md:pl-16", "md:pl-32"];
+
+const PHASE_HEADER_TEXT: Record<string, string> = {
+  complete: "Foundation Complete",
+  active: "Currently Building",
+  upcoming: "Path to Launch",
+};
+
+function phaseHeaderColor(status: string): string {
+  switch (status) {
+    case "complete":
+      return "text-teal-400";
+    case "active":
+      return "text-copper-light";
+    default:
+      return "text-gray-500";
+  }
+}
+
+function railColor(status: string): string {
+  switch (status) {
+    case "complete":
+      return "bg-teal-500/55";
+    case "active":
+      return "bg-copper/55";
+    default:
+      return "bg-white/[0.08]";
+  }
+}
+
+function gradientHorizontal(from: string, to: string): string {
+  if (from === "complete" && to === "active")
+    return "bg-gradient-to-r from-teal-500/55 to-copper/55";
+  if (from === "active" && to === "upcoming")
+    return "bg-gradient-to-r from-copper/55 to-white/[0.08]";
+  return "bg-white/[0.08]";
+}
+
+function gradientVertical(from: string, to: string): string {
+  if (from === "complete" && to === "active")
+    return "bg-gradient-to-b from-teal-500/55 to-copper/55";
+  if (from === "active" && to === "upcoming")
+    return "bg-gradient-to-b from-copper/55 to-white/[0.08]";
+  return "bg-white/[0.08]";
+}
+
+function PhaseConnector({
+  gi,
+  fromStatus,
+  toStatus,
+}: {
+  gi: number;
+  fromStatus: string;
+  toStatus: string;
+}) {
+  const offsetPx = 64;
+  const fromBg = railColor(fromStatus);
+  const toBg = railColor(toStatus);
+  const horizontalGradient = gradientHorizontal(fromStatus, toStatus);
+  const verticalGradient = gradientVertical(fromStatus, toStatus);
+
+  return (
+    <div className="relative h-12 mb-4" aria-hidden="true">
+      {/* Mobile: simple vertical line bridges the gap */}
+      <span
+        className={`md:hidden absolute top-0 bottom-0 w-px ${verticalGradient}`}
+        style={{ left: 7.5 }}
+      />
+      {/* Desktop: L-elbow connector */}
+      <span
+        className={`hidden md:block absolute w-px ${fromBg}`}
+        style={{ left: (gi - 1) * offsetPx + 7.5, top: 0, height: 24 }}
+      />
+      <span
+        className={`hidden md:block absolute h-px ${horizontalGradient}`}
+        style={{ left: (gi - 1) * offsetPx + 7.5, top: 24, width: offsetPx }}
+      />
+      <span
+        className={`hidden md:block absolute w-px ${toBg}`}
+        style={{ left: gi * offsetPx + 7.5, top: 24, height: 24 }}
+      />
+    </div>
   );
 }

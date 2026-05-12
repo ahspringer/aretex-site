@@ -1,9 +1,9 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { Cpu, Eye, RefreshCw, Activity } from "lucide-react";
+import { Cpu, Eye, RefreshCw } from "lucide-react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
-import { fadeUp, staggerContainer, viewportOptions } from "@/lib/motion";
+import { fadeUp, viewportOptions } from "@/lib/motion";
 
 const steps = [
   {
@@ -24,12 +24,6 @@ const steps = [
     label: "Virtual Coaching",
     body: "Real-time visual feedback integrates ballistic solutions directly into your sight picture. Instant correction markers guide your hold and trigger timing, turning every shot into a deliberate training rep with immediate cognitive reinforcement.",
   },
-  // {
-  //   number: "04",
-  //   icon: Activity,
-  //   label: "Training Analytics",
-  //   body: "Your session data syncs to the companion app, where you receive customized training insights. Analyze pre-shot stability trends, track accuracy relative to environmental compensation, and review detailed performance metrics to accelerate skill development.",
-  // },
 ];
 
 export default function Technology() {
@@ -38,15 +32,15 @@ export default function Technology() {
 
   return (
     <SectionWrapper id="technology">
-      <motion.div
-        initial={animate ? "hidden" : "visible"}
-        whileInView="visible"
-        viewport={viewportOptions}
-        variants={animate ? staggerContainer : {}}
-        className="flex flex-col gap-16"
-      >
+      <div className="flex flex-col gap-16">
         {/* Header */}
-        <motion.div variants={animate ? fadeUp : {}} className="max-w-2xl">
+        <motion.div
+          initial={animate ? "hidden" : "visible"}
+          whileInView="visible"
+          viewport={viewportOptions}
+          variants={animate ? fadeUp : {}}
+          className="max-w-2xl"
+        >
           <p className="text-xs font-mono text-teal-500 uppercase tracking-widest mb-4">
             How It Works
           </p>
@@ -65,10 +59,40 @@ export default function Technology() {
         </motion.div>
 
         {/* Steps */}
-        <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-8 lg:gap-12 relative">
-          {/* Connector line (desktop only) */}
-          <div
-            className="hidden lg:block absolute top-8 left-[calc(12.5%+1rem)] right-[calc(12.5%+1rem)] h-px bg-gradient-to-r from-transparent via-teal-600/30 to-transparent pointer-events-none"
+        <motion.div
+          initial={animate ? "hidden" : "visible"}
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={
+            animate
+              ? {
+                  hidden: {},
+                  visible: {
+                    transition: {
+                      delayChildren: 0.15,
+                      staggerChildren: 0.45,
+                    },
+                  },
+                }
+              : {}
+          }
+          className="grid md:grid-cols-3 gap-10 md:gap-8 lg:gap-12 relative"
+        >
+          {/* Animated connector line — draws in as the first stagger child */}
+          <motion.div
+            variants={
+              animate
+                ? {
+                    hidden: { scaleX: 0, opacity: 0 },
+                    visible: {
+                      scaleX: 1,
+                      opacity: 1,
+                      transition: { duration: 1.4, ease: "easeOut" },
+                    },
+                  }
+                : {}
+            }
+            className="hidden md:block absolute top-5 left-[calc(16.67%+1.25rem)] right-[calc(16.67%+1.25rem)] h-px bg-gradient-to-r from-teal-500/0 via-teal-500/45 to-teal-500/0 origin-left pointer-events-none"
             aria-hidden="true"
           />
 
@@ -77,16 +101,31 @@ export default function Technology() {
             return (
               <motion.div
                 key={step.number}
-                variants={animate ? fadeUp : {}}
+                variants={
+                  animate
+                    ? {
+                        hidden: { opacity: 0, y: 28 },
+                        visible: {
+                          opacity: 1,
+                          y: 0,
+                          transition: { duration: 0.6, ease: "easeOut" },
+                        },
+                      }
+                    : {}
+                }
                 className="relative flex flex-col gap-5"
               >
                 {/* Number + Icon */}
                 <div className="flex items-center gap-4">
-                  <span className="text-5xl font-extrabold font-mono text-teal-900/40 leading-none select-none">
+                  <span className="text-5xl font-extrabold font-mono text-teal-900/40 leading-none select-none tabular-nums">
                     {step.number}
                   </span>
-                  <div className="w-10 h-10 rounded-full border border-teal-600/30 bg-teal-600/5 flex items-center justify-center shrink-0">
-                    <Icon size={18} className="text-teal-400" aria-hidden="true" />
+                  <div className="w-10 h-10 rounded-full border border-teal-500/40 bg-near-black flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(45,212,191,0.18)] z-10">
+                    <Icon
+                      size={18}
+                      className="text-teal-400"
+                      aria-hidden="true"
+                    />
                   </div>
                 </div>
 
@@ -102,10 +141,13 @@ export default function Technology() {
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Bottom callout */}
         <motion.div
+          initial={animate ? "hidden" : "visible"}
+          whileInView="visible"
+          viewport={viewportOptions}
           variants={animate ? fadeUp : {}}
           className="border border-teal-600/20 bg-teal-600/5 rounded-xl px-6 py-5 flex flex-col sm:flex-row sm:items-center gap-4"
         >
@@ -123,7 +165,7 @@ export default function Technology() {
             APP. NO. 64/060,960
           </span>
         </motion.div>
-      </motion.div>
+      </div>
     </SectionWrapper>
   );
 }

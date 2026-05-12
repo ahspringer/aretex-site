@@ -155,7 +155,7 @@ export default function Contact() {
                   Message received.
                 </p>
                 <p className="text-sm text-gray-500">
-                  We will be in touch within 48 hours.
+                  We will be in touch.
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
@@ -194,7 +194,7 @@ export default function Contact() {
                 />
                 <FormTextarea
                   label="Message (optional)"
-                  placeholder="Tell us how we can help..."
+                  placeholder="Tell us how we can help"
                   {...register("message")}
                 />
                 {submitError && (
@@ -210,7 +210,7 @@ export default function Contact() {
                   Send Message
                 </Button>
                 <p className="text-xs text-gray-500">
-                  We respond within 48 hours.
+                  We typically respond within 48 hours.
                 </p>
               </form>
             )}
