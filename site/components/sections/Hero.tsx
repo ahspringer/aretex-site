@@ -102,7 +102,7 @@ export default function Hero() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <Badge variant="copper">Pre-Sales · Coming Soon</Badge>
+              <Badge variant="copper">Pre-Sales Coming Soon</Badge>
             </motion.div>
 
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[0.95] tracking-tight">
