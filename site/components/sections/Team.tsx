@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { fadeUp, staggerContainer, viewportOptions } from "@/lib/motion";
+import { withBasePath } from "@/lib/assets";
 
 type Founder = {
   name: string;
@@ -23,7 +24,7 @@ const founders: Founder[] = [
     education: "B.S. Aerospace Engineering (UAH '19)\tM.S. Mechanical Engineering (UA '24)",
     bio: "Experienced Technical Program Manager and Former U.S. Army Aviation Test Director. Has led multi-million-dollar weapon system programs and engineering projects.",
     tag: "Vision & Strategy",
-    image: "/images/alex-springer.jpg",
+    image: withBasePath("/images/alex-springer.jpg"),
   },
   {
     name: "Mike Mangrum",
@@ -32,7 +33,7 @@ const founders: Founder[] = [
     education: "B.S. Aerospace Engineering (UAH '19)",
     bio: "Senior R&D engineer with successful OTA prototype contract awards. Active precision rifle competitor and hunter focused on practical field performance.",
     tag: "Applied R&D",
-    image: "/images/mike-mangrum.jpg",
+    image: withBasePath("/images/mike-mangrum.jpg"),
   },
   {
     name: "Wiley Irish",
@@ -41,6 +42,7 @@ const founders: Founder[] = [
     education: "B.S. Aerospace Engineering (UAH '24)",
     bio: "Army civilian engineer who led red team cybersecurity test programs and threat replication engineering. Sensor integration and systems architecture specialist.",
     tag: "Technical Leadership",
+    image: withBasePath("/images/wiley-irish.jpg"),
   },
 ];
 

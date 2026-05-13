@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Badge from "@/components/ui/Badge";
+import { withBasePath } from "@/lib/assets";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -10,7 +11,7 @@ export default function Footer() {
         {/* Logo */}
         <div className="py-12 md:py-16 flex justify-center">
           <Image
-            src="/images/logo.png"
+            src={withBasePath("/images/logo.png")}
             alt="Aretex Labs"
             width={750}
             height={380}

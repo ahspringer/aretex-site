@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { fadeUp, staggerContainer, viewportOptions } from "@/lib/motion";
+import { withBasePath } from "@/lib/assets";
 
 type Feature = {
   label: string;
@@ -22,7 +23,7 @@ const features: Feature[] = [
     headline: "Your rifle. Your scope. No modifications.",
     body: "ZeroShot VR clips onto the objective bell of any rifle scope without permanent modification to the firearm or optic. Switch between rifles in seconds. Train with your actual competition setup so the reps transfer perfectly when it counts.",
     specs: ["Any objective bell", "No tools required", "Any caliber · platform · optic"],
-    image: "/images/render-mounted.png",
+    image: withBasePath("/images/render-mounted.png"),
     imageAlt: "ZeroShot VR attachment mounted on a rifle scope objective bell",
     flip: false,
   },
@@ -32,7 +33,7 @@ const features: Feature[] = [
     headline: "Physics that match the real world.",
     body: "Our in-house ballistics engine runs full G7 drag model simulations accounting for wind, elevation, latitude, air density, humidity, and barrel twist. The correction you apply in ZeroShot matches the correction you apply at the range.",
     specs: ["G7 drag model", "Full environmental sim", "Custom DOPE · Scenario library"],
-    image: "/images/render-cutout.png",
+    image: withBasePath("/images/render-cutout.png"),
     imageAlt: "ZeroShot VR internal optics and sensor cutaway view",
     flip: true,
   },

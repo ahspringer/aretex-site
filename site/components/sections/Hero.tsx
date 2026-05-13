@@ -10,6 +10,7 @@ import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
 import { FormInput } from "@/components/ui/FormInput";
 import { submitContact } from "@/lib/contact";
+import { withBasePath } from "@/lib/assets";
 
 const schema = z.object({
   email: z.string().email("Enter a valid email address"),
@@ -180,7 +181,7 @@ export default function Hero() {
             <div className="relative aspect-[4/3] w-full">
               <div className="absolute inset-0 rounded-2xl overflow-hidden border border-white/[0.06]">
                 <Image
-                  src="/images/hero-render.png"
+                  src={withBasePath("/images/hero-render.png")}
                   alt="ZeroShot VR scope attachment mounted on a rifle in a dark studio environment"
                   fill
                   priority

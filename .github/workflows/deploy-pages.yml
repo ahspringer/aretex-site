@@ -1,5 +1,8 @@
 name: Deploy Next.js site to Pages
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 on:
   push:
     branches: [main]
@@ -41,8 +44,8 @@ jobs:
       - name: Build with Next.js
         run: npm run build
         env:
-          PAGES_BASE_PATH: ${{ steps.setup_pages.outputs.base_path }}
-          NEXT_PUBLIC_CONTACT_ENDPOINT: ${{ secrets.NEXT_PUBLIC_CONTACT_ENDPOINT }}
+          PAGES_BASE_PATH: ${{ steps.setup_pages.outputs.base_path || format('/{0}', github.event.repository.name) }}
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.setup_pages.outputs.base_path || format('/{0}', github.event.repository.name) }}
 
       - name: Add .nojekyll
         run: New-Item -Path out/.nojekyll -ItemType File -Force

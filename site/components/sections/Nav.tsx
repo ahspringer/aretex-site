@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import Button from "@/components/ui/Button";
+import { withBasePath } from "@/lib/assets";
 
 const navLinks = [
   { label: "Problem", href: "#problem" },
@@ -50,7 +51,7 @@ export default function Nav() {
             aria-label="Aretex Labs home"
           >
             <Image
-              src="/images/logo-mark.png"
+              src={withBasePath("/images/logo-mark.png")}
               alt=""
               width={247}
               height={215}
