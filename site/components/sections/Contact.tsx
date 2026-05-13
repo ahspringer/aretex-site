@@ -80,18 +80,18 @@ export default function Contact() {
                   <Mail size={16} className="text-teal-400" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="text-xs font-mono text-gray-500 uppercase tracking-wider mb-1">
+                  {/* <p className="text-xs font-mono text-gray-500 uppercase tracking-wider mb-1">
                     Email
-                  </p>
+                  </p> */}
                   <a
                     href="mailto:contact@aretexlabs.com"
                     className="text-sm text-gray-900 dark:text-white hover:text-teal-400 transition-colors"
                   >
-                    contact@aretexlabs.com
+                    coming soon
                   </a>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  {/* <p className="text-xs text-gray-500 mt-0.5">
                     [Placeholder — email in setup]
-                  </p>
+                  </p> */}
                 </div>
               </div>
 
@@ -100,18 +100,18 @@ export default function Contact() {
                   <Phone size={16} className="text-teal-400" aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="text-xs font-mono text-gray-500 uppercase tracking-wider mb-1">
+                  {/* <p className="text-xs font-mono text-gray-500 uppercase tracking-wider mb-1">
                     Phone
-                  </p>
+                  </p> */}
                   <a
                     href="tel:+10000000000"
                     className="text-sm text-gray-900 dark:text-white hover:text-teal-400 transition-colors"
                   >
-                    (000) 000-0000
+                    coming soon
                   </a>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  {/* <p className="text-xs text-gray-500 mt-0.5">
                     [Placeholder — number in setup]
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </div>

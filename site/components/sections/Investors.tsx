@@ -134,13 +134,15 @@ export default function Investors() {
           </p>
           <h2 className="text-4xl md:text-5xl font-extrabold text-white leading-tight tracking-tight">
             Built for a{" "}
-            <span className="text-teal-400">$9.4B market.</span>
+            <span className="text-teal-400">$3.9B market.</span>
           </h2>
           <p className="mt-6 text-base text-gray-400 leading-relaxed max-w-2xl">
-            The gun accessories market represents <b>9.9+ million</b> active firearm
-            enthusiasts in the United States alone. Our primary targets are PRS,
+            The gun accessories market represents <b>52.7+ million</b> active firearm
+            target shooting enthusiasts in the United States alone. Our primary targets are PRS,
             F-Class, and serious long-range marksmanship competitors — a
-            technically sophisticated, underserved, high-intent segment.
+            technically sophisticated, underserved, high-intent segment. A displacement
+            strategy also allows us to target the staggering <b>$4.7B</b> spent on ammunition
+            at the range each year, by offering a compelling alternative to live-fire training.
           </p>
         </motion.div>
 
@@ -150,8 +152,8 @@ export default function Investors() {
           className="grid sm:grid-cols-3 gap-6"
         >
           {[
-            { value: "$9.4B", label: "Gun accessories market (TAM)" },
-            { value: "9.9M", label: "Active firearm enthusiasts (US)" },
+            { value: "$3.9B", label: "Gun accessories market (TAM)" },
+            { value: "52.7M", label: "Active firearm target shooting enthusiasts (US)" },
             { value: "Pre-Seed", label: "Don't miss out · Wait list open" },
           ].map((item) => (
             <div

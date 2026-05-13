@@ -22,7 +22,7 @@ const features: Feature[] = [
     label: "Universal Compatibility",
     headline: "Your rifle. Your scope. No modifications.",
     body: "ZeroShot VR clips onto the objective bell of any rifle scope without permanent modification to the firearm or optic. Switch between rifles in seconds. Train with your actual competition setup so the reps transfer perfectly when it counts.",
-    specs: ["Any objective bell", "No tools required", "Any caliber · platform · optic"],
+    specs: ["Any objective bell", "No tools required", "Any caliber", "Any platform", "Any optic"],
     image: withBasePath("/images/render-mounted.png"),
     imageAlt: "ZeroShot VR attachment mounted on a rifle scope objective bell",
     flip: false,
@@ -32,7 +32,7 @@ const features: Feature[] = [
     label: "High-Fidelity Ballistics",
     headline: "Physics that match the real world.",
     body: "Our in-house ballistics engine runs full G7 drag model simulations accounting for wind, elevation, latitude, air density, humidity, and barrel twist. The correction you apply in ZeroShot matches the correction you apply at the range.",
-    specs: ["G7 drag model", "Full environmental sim", "Custom DOPE · Scenario library"],
+    specs: ["G7 drag model", "Full environmental sim", "Custom DOPE", "Scenario library"],
     image: withBasePath("/images/render-cutout.png"),
     imageAlt: "ZeroShot VR internal optics and sensor cutaway view",
     flip: true,
@@ -41,8 +41,8 @@ const features: Feature[] = [
     layout: "centered",
     label: "Optical Clarity",
     headline: "See what you'd see at a real range.",
-    body: "A proprietary optical train delivers a bright, clear, high-contrast virtual reticle overlay through the rifle scope eyepiece. No external screen. No VR headset required for the shooter. The sight picture is natural — because it is your actual scope.",
-    specs: ["120Hz refresh", "Reticle simulation matches optic zero", "Up to 1000m+ · Headset-free"],
+    body: "A proprietary optical train delivers a bright, clear, high-contrast virtual scene through the rifle scope eyepiece. No external screen. No VR headset required for the shooter. The sight picture is natural — because it is your actual scope.",
+    specs: ["120Hz refresh", "Reticle simulation matches optic zero", "Up to 1000m+", "Headset-free"],
   },
 ];
 
