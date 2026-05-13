@@ -16,9 +16,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Aretex Labs — ZeroShot VR",
+  title: "Aretex Labs",
   description:
-    "Aretex Labs is building ZeroShot VR: a precision virtual reality scope attachment for at-home long-range rifle training. No range. No ammo. No compromise.",
+    "Aretex Labs builds systems that elevate the human — not replace them. We leverage technology to help people achieve and surpass their fullest potential.",
   robots: {
     index: false,
     follow: false,

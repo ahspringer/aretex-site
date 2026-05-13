@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import Link from "next/link";
 import Image from "next/image";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { fadeUp, staggerContainer, viewportOptions } from "@/lib/motion";
@@ -64,11 +65,11 @@ export default function Team() {
             The Team
           </p>
           <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight tracking-tight">
-            Three founders. One technical standard.
+            The founding team.
           </h2>
           <p className="mt-6 text-base text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl">
-            Aretex Labs combines advanced systems engineering, applied ballistics,
-            and field-first shooter context. Our founding team is built to ship
+            Aretex Labs combines advanced systems engineering, applied physics,
+            and field-first operational experience. We are built to ship
             precision hardware and software under real constraints.
           </p>
         </motion.div>
@@ -150,7 +151,11 @@ export default function Team() {
             The Aretex Code
           </h3>
           <p className="mt-6 text-base text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl">
-            These aren't statements on a wall. They're codified into our operating agreement, embedded in every decision we make, and tested in every meeting. They are how Aretex Labs stays precise.
+            These aren&apos;t statements on a wall. They&apos;re codified into how we operate, embedded in every decision we make, and tested in every meeting.{" "}
+            <Link href="/vision" className="text-teal-500 hover:text-teal-400 underline underline-offset-4 transition-colors">
+              Read more about our Vision
+            </Link>
+            .
           </p>
         </motion.div>
 

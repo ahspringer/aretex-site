@@ -1,6 +1,15 @@
 import Image from "next/image";
-import Badge from "@/components/ui/Badge";
+import Link from "next/link";
 import { withBasePath } from "@/lib/assets";
+
+const footerLinks = [
+  { label: "Vision", href: "/vision" },
+  { label: "Engineering", href: "/engineering" },
+  { label: "Team", href: "/team" },
+  { label: "ZeroShot", href: "/zeroshot" },
+  { label: "Investors", href: "/investors" },
+  { label: "Contact", href: "/contact" },
+];
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -19,6 +28,19 @@ export default function Footer() {
           />
         </div>
 
+        {/* Nav links */}
+        <nav className="flex flex-wrap justify-center gap-x-8 gap-y-3 pb-10" aria-label="Footer navigation">
+          {footerLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-xs font-medium text-gray-500 hover:text-gray-300 tracking-wider uppercase transition-colors duration-200"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
         {/* Hairline */}
         <div className="h-px bg-white/[0.06]" aria-hidden="true" />
 
@@ -34,9 +56,12 @@ export default function Footer() {
             &copy; {year} Aretex Labs, LLC. All rights reserved.
           </p>
 
-          <Badge variant="copper">Stealth Mode</Badge>
+          <span className="text-xs font-mono text-gray-700 uppercase tracking-widest">
+            Alabama, United States
+          </span>
         </div>
       </div>
     </footer>
   );
 }
+
