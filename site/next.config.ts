@@ -1,4 +1,4 @@
-import type { NextConfig } from "next"
+import type { NextConfig } from "next";
 
 const rawBasePath = process.env.PAGES_BASE_PATH || "";
 const basePath = rawBasePath === "/" ? "" : rawBasePath;
