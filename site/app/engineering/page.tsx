@@ -3,7 +3,7 @@ import Footer from "@/components/sections/Footer";
 import EngineeringDomains from "@/components/sections/EngineeringDomains";
 
 export const metadata = {
-  title: "Engineering — Aretex Labs",
+  title: "Aretex Labs | Engineering",
   description:
     "Aretex Labs operates across embedded systems, ballistics simulation, hardware prototyping, and optical human-machine interface design.",
 };

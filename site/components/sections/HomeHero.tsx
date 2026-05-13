@@ -13,7 +13,12 @@ const pages = [
   {
     label: "Engineering",
     href: "/engineering",
-    description: "The domains we operate in and build for.",
+    description: "The domains we build for.",
+  },
+  {
+    label: "Team",
+    href: "/team",
+    description: "The co-founders building Aretex Labs.",
   },
   {
     label: "ZeroShot",
@@ -62,8 +67,8 @@ export default function HomeHero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              Building systems that{" "}
-              <span className="text-teal-400">elevate the human</span>.
+              Building systems that {" "}
+              <span className="text-teal-400">elevate the user.</span>
             </motion.h1>
             <motion.p
               className="text-lg md:text-xl text-gray-400 leading-relaxed max-w-2xl"
@@ -78,7 +83,7 @@ export default function HomeHero() {
 
           {/* Page cards */}
           <motion.div
-            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
+            className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4"
             initial={animate ? { opacity: 0, y: 20 } : false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}

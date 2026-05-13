@@ -3,7 +3,7 @@ import Footer from "@/components/sections/Footer";
 import Contact from "@/components/sections/Contact";
 
 export const metadata = {
-  title: "Contact — Aretex Labs",
+  title: "Aretex Labs | Contact",
   description: "Get in touch with Aretex Labs.",
 };
 

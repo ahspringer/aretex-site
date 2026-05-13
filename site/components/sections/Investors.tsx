@@ -62,7 +62,10 @@ export default function Investors() {
             Investors
           </p>
           <h2 className="text-4xl md:text-5xl font-extrabold text-white leading-tight tracking-tight">
-            We&apos;re not actively raising &mdash; yet.
+            We&apos;re not actively raising.
+          </h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white leading-tight tracking-tight">
+            <span className="text-teal-400">Yet.</span>
           </h2>
           <p className="mt-6 text-base text-gray-400 leading-relaxed">
             Aretex Labs is currently focused on product development ahead of our

@@ -3,7 +3,7 @@ import Footer from "@/components/sections/Footer";
 import Investors from "@/components/sections/Investors";
 
 export const metadata = {
-  title: "Investors — Aretex Labs",
+  title: "Aretex Labs | Investors",
   description:
     "Aretex Labs investor information, development roadmap, and contact form.",
 };

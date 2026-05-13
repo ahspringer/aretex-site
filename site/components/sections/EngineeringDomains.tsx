@@ -55,11 +55,11 @@ export default function EngineeringDomains() {
             id="engineering-domains-heading"
             className="text-4xl md:text-5xl font-extrabold text-white leading-tight tracking-tight"
           >
-            What we build in.
+            What we build.
           </h2>
           <p className="mt-6 text-base text-gray-400 leading-relaxed">
             Aretex Labs operates across a focused set of hardware and software
-            engineering disciplines. We go deep, not wide.
+            engineering disciplines.
           </p>
         </motion.div>
 
