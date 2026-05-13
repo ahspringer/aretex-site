@@ -44,8 +44,8 @@ jobs:
       - name: Build with Next.js
         run: npm run build
         env:
-          PAGES_BASE_PATH: ${{ steps.setup_pages.outputs.base_path || format('/{0}', github.event.repository.name) }}
-          NEXT_PUBLIC_BASE_PATH: ${{ steps.setup_pages.outputs.base_path || format('/{0}', github.event.repository.name) }}
+          PAGES_BASE_PATH: ""
+          NEXT_PUBLIC_BASE_PATH: ""
 
       - name: Add .nojekyll
         run: New-Item -Path out/.nojekyll -ItemType File -Force
