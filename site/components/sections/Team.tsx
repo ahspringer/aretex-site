@@ -42,7 +42,7 @@ const founders: Founder[] = [
     education: "B.S. Aerospace Engineering (UAH '24)",
     bio: "Army civilian engineer who led red team cybersecurity test programs and threat replication engineering. Sensor integration and systems architecture specialist.",
     tag: "Technical Leadership",
-    image: withBasePath("/images/wiley-irish.jpg"),
+    image: withBasePath("/images/wiley-irish.png"),
   },
 ];
 
