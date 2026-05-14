@@ -9,13 +9,13 @@ const domains = [
     icon: Cpu,
     title: "Embedded Systems & Sensor Integration",
     description:
-      "We design and build hardware-software systems from the ground up — precision inertial measurement, real-time firmware, and hardware/software co-design that closes the loop between the physical and computational.",
+      "We design and build hardware-software systems from the ground up — precision measurements, real-time firmware, and hardware/software co-design that closes the loop between the physical and computational.",
   },
   {
     icon: Crosshair,
     title: "Ballistics & Physics Simulation",
     description:
-      "High-fidelity G7 drag modeling, environmental variable processing, and predictive ballistic solutions. We don't approximate — we model the real world and validate against it.",
+      "High-fidelity modeling, environmental effects, and predictive solutions. We model the real world and validate against it.",
   },
   {
     icon: Wrench,
