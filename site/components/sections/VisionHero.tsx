@@ -68,10 +68,8 @@ export default function VisionHero() {
 
             <motion.div className="flex flex-col gap-5" variants={animate ? fadeUp : {}}>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[0.95] tracking-tight">
-                Built for
-              </h1>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[0.95] tracking-tight">
-                <span className="text-teal-400">what&apos;s possible.</span>
+                Built for {" "}
+              <span className="text-teal-400">what&apos;s possible.</span>
               </h1>
             </motion.div>
 
