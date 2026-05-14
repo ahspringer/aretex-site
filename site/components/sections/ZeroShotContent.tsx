@@ -55,16 +55,10 @@ export default function ZeroShotContent() {
     <>
       {/* Hero — point cloud + headline */}
       <section
-        className="relative min-h-screen bg-near-black flex flex-col justify-center overflow-hidden"
+        className="relative overflow-hidden"
         aria-label="ZeroShot"
       >
-        {/* Ambient glow */}
-        <div
-          className="absolute -top-32 left-1/2 -translate-x-1/2 w-[50rem] h-[32rem] rounded-full bg-teal-600/[0.07] blur-3xl pointer-events-none"
-          aria-hidden="true"
-        />
-
-        <div className="relative max-w-6xl mx-auto px-6 md:px-12 py-32 w-full">
+        <div className="relative site-container py-4 lg:py-1 w-full">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left: copy */}
             <motion.div
@@ -81,7 +75,7 @@ export default function ZeroShotContent() {
                 className="text-5xl md:text-6xl font-extrabold text-white leading-[0.95] tracking-tight"
                 variants={animate ? fadeUp : {}}
               >
-                Zero<span className="text-teal-400">Shot</span>
+                ZeroShot
               </motion.h1>
 
               <motion.p
@@ -123,10 +117,10 @@ export default function ZeroShotContent() {
 
       {/* Coming soon + email capture */}
       <section
-        className="relative bg-gray-50 dark:bg-surface-dark px-6 md:px-12 lg:px-24 py-24 lg:py-32"
+        className="relative site-section"
         aria-label="Stay updated"
       >
-        <div className="max-w-6xl mx-auto">
+        <div className="site-container">
           <motion.div
             className="flex flex-col gap-12 max-w-2xl"
             initial={animate ? "hidden" : "visible"}
@@ -161,7 +155,7 @@ export default function ZeroShotContent() {
               ) : (
                 <form
                   onSubmit={handleSubmit(onSubmit)}
-                  className="flex flex-col sm:flex-row gap-3"
+                  className="flex flex-col sm:flex-row sm:items-end gap-3"
                   noValidate
                 >
                   <div className="flex-1">
@@ -181,7 +175,7 @@ export default function ZeroShotContent() {
                     variant="primary"
                     size="md"
                     loading={isSubmitting}
-                    className="shrink-0 self-start"
+                    className="w-full sm:w-auto shrink-0 self-center sm:self-auto !h-[46px] !py-0"
                   >
                     Notify Me
                   </Button>
@@ -192,6 +186,9 @@ export default function ZeroShotContent() {
               )}
             </motion.div>
           </motion.div>
+          <p className="mt-4 text-[11px] font-mono text-gray-500 uppercase tracking-[0.25em]">
+            sales@aretexlabs.com
+          </p>
         </div>
       </section>
     </>

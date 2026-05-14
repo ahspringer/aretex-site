@@ -11,20 +11,17 @@ export default function SectionWrapper({
   id,
   children,
   className,
-  dark = false,
+  dark: _dark = false,
 }: SectionWrapperProps) {
   return (
     <section
       id={id}
       className={cn(
-        "relative w-full px-6 md:px-12 lg:px-24 py-24 lg:py-32",
-        dark
-          ? "bg-near-black dark:bg-near-black"
-          : "bg-gray-50 dark:bg-surface-dark",
+        "relative w-full site-section",
         className
       )}
     >
-      <div className="max-w-6xl mx-auto">{children}</div>
+      <div className="site-container">{children}</div>
     </section>
   );
 }

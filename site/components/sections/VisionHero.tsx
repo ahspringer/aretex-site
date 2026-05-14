@@ -32,7 +32,7 @@ const codeItems = [
     number: "05",
     title: "Every dollar serves the mission.",
     enforcement:
-      "Leadership is a responsibility, not a perk — and we enforce that from the moment we show up.",
+      "Leadership is a responsibility, not a perk. We enforce that at every echelon and with every interaction.",
   },
 ];
 
@@ -42,16 +42,10 @@ export default function VisionHero() {
 
   return (
     <section
-      className="relative bg-near-black overflow-hidden"
+      className="relative overflow-hidden"
       aria-label="Vision"
     >
-      {/* Ambient glow */}
-      <div
-        className="absolute top-0 left-0 w-[50rem] h-[40rem] rounded-full bg-teal-600/[0.06] blur-3xl -translate-x-1/3 -translate-y-1/4 pointer-events-none"
-        aria-hidden="true"
-      />
-
-      <div className="relative max-w-6xl mx-auto px-6 md:px-12 py-32 lg:py-36 w-full">
+      <div className="relative site-container py-24 lg:py-28 w-full">
         <motion.div
           className="flex flex-col gap-16"
           initial={animate ? "hidden" : "visible"}
@@ -68,10 +62,7 @@ export default function VisionHero() {
 
             <motion.div className="flex flex-col gap-5" variants={animate ? fadeUp : {}}>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[0.95] tracking-tight">
-                Built for
-              </h1>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[0.95] tracking-tight">
-                <span className="text-teal-400">what&apos;s possible.</span>
+                Built for what's possible.
               </h1>
             </motion.div>
 

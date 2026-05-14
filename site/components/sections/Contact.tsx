@@ -75,7 +75,7 @@ export default function Contact() {
             className="flex flex-col gap-8"
           >
             <div className="flex flex-col gap-5">
-              <div className="flex items-start gap-4">
+              <div className="flex items-center gap-4">
                 <div className="w-9 h-9 rounded-md border border-teal-600/30 bg-teal-600/5 flex items-center justify-center shrink-0">
                   <Mail size={16} className="text-teal-400" aria-hidden="true" />
                 </div>
@@ -84,10 +84,10 @@ export default function Contact() {
                     Email
                   </p> */}
                   <a
-                    href="mailto:contact@aretexlabs.com"
+                    href="mailto:sales@aretexlabs.com"
                     className="text-sm text-gray-900 dark:text-white hover:text-teal-400 transition-colors"
                   >
-                    coming soon
+                    sales@aretexlabs.com
                   </a>
                   {/* <p className="text-xs text-gray-500 mt-0.5">
                     [Placeholder — email in setup]
@@ -95,25 +95,19 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
+              {/* <div className="flex items-start gap-4">
                 <div className="w-9 h-9 rounded-md border border-teal-600/30 bg-teal-600/5 flex items-center justify-center shrink-0">
                   <Phone size={16} className="text-teal-400" aria-hidden="true" />
                 </div>
                 <div>
-                  {/* <p className="text-xs font-mono text-gray-500 uppercase tracking-wider mb-1">
-                    Phone
-                  </p> */}
                   <a
                     href="tel:+10000000000"
                     className="text-sm text-gray-900 dark:text-white hover:text-teal-400 transition-colors"
                   >
                     coming soon
                   </a>
-                  {/* <p className="text-xs text-gray-500 mt-0.5">
-                    [Placeholder — number in setup]
-                  </p> */}
                 </div>
-              </div>
+              </div> */}
             </div>
 
             <div className="border-t border-gray-200 dark:border-gray-800 pt-6">

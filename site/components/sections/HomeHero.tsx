@@ -38,16 +38,10 @@ export default function HomeHero() {
 
   return (
     <section
-      className="relative min-h-screen bg-near-black flex flex-col justify-center overflow-hidden"
+      className="relative min-h-[calc(100vh-4rem)] flex flex-col justify-center overflow-hidden"
       aria-label="Welcome"
     >
-      {/* Ambient glow */}
-      <div
-        className="absolute -top-64 left-1/2 -translate-x-1/2 w-[60rem] h-[40rem] rounded-full bg-teal-600/[0.06] blur-3xl pointer-events-none"
-        aria-hidden="true"
-      />
-
-      <div className="relative max-w-6xl mx-auto px-6 md:px-12 py-32 w-full">
+      <div className="relative site-container py-24 lg:py-28 w-full">
         <div className="flex flex-col gap-16">
           {/* Wordmark / eyebrow */}
           <motion.p

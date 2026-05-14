@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <Nav />
-      <main>
+      <main className="site-main">
         <HomeHero />
       </main>
       <Footer />

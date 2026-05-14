@@ -11,7 +11,7 @@ export default function ContactPage() {
   return (
     <>
       <Nav />
-      <main className="pt-16">
+      <main className="site-main">
         <Contact />
       </main>
       <Footer />

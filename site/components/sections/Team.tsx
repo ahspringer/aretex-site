@@ -22,7 +22,7 @@ const founders: Founder[] = [
     name: "Alex Springer",
     initials: "AS",
     role: "Chief Executive Officer",
-    education: "B.S. Aerospace Engineering (UAH '19)\tM.S. Mechanical Engineering (UA '24)",
+    education: "B.S. Aerospace Engineering (UAH) M.S. Mechanical Engineering (UA)",
     bio: "Experienced Technical Program Manager and Former U.S. Army Aviation Test Director. Has led multi-million-dollar weapon system programs and engineering projects.",
     tag: "Vision & Strategy",
     image: withBasePath("/images/alex-springer.jpg"),
@@ -31,7 +31,7 @@ const founders: Founder[] = [
     name: "Mike Mangrum",
     initials: "MM",
     role: "Chief of Research & Development",
-    education: "B.S. Aerospace Engineering (UAH '19)",
+    education: "B.S. Aerospace Engineering (UAH)",
     bio: "Senior R&D engineer with successful OTA prototype contract awards. Active precision rifle competitor and hunter focused on practical field performance.",
     tag: "Applied R&D",
     image: withBasePath("/images/mike-mangrum.jpg"),
@@ -40,7 +40,7 @@ const founders: Founder[] = [
     name: "Wiley Irish",
     initials: "WI",
     role: "Chief of Engineering & Technology",
-    education: "B.S. Aerospace Engineering (UAH '24)",
+    education: "B.S. Aerospace Engineering (UAH)",
     bio: "Army civilian engineer who led red team cybersecurity test programs and threat replication engineering. Sensor integration and systems architecture specialist.",
     tag: "Technical Leadership",
     image: withBasePath("/images/wiley-irish.png"),
@@ -64,8 +64,8 @@ export default function Team() {
           <p className="text-xs font-mono text-teal-500 uppercase tracking-widest mb-4">
             The Team
           </p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight tracking-tight">
-            The founding team.
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[0.95] tracking-tight">
+            Three founders. One mission.
           </h2>
           <p className="mt-6 text-base text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl">
             Aretex Labs combines advanced systems engineering, applied physics,
@@ -113,13 +113,10 @@ export default function Team() {
                 )}
               </div>
 
-              <div className="flex items-center justify-between gap-3">
+              <div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white">
                   {founder.name}
                 </h3>
-                <span className="text-[10px] font-mono uppercase tracking-widest text-copper border border-copper/30 bg-copper/5 rounded-full px-2 py-1">
-                  {founder.tag}
-                </span>
               </div>
 
               <p className="text-sm font-semibold text-teal-600 dark:text-teal-400 leading-snug">

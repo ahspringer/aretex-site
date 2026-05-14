@@ -12,7 +12,7 @@ export default function InvestorsPage() {
   return (
     <>
       <Nav />
-      <main className="pt-16">
+      <main className="site-main">
         <Investors />
       </main>
       <Footer />

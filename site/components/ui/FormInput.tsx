@@ -2,12 +2,12 @@ import { InputHTMLAttributes, TextareaHTMLAttributes, forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
+  label?: string;
   error?: string;
 }
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
-  label: string;
+  label?: string;
   error?: string;
 }
 
@@ -16,15 +16,17 @@ const inputBase =
 
 export const FormInput = forwardRef<HTMLInputElement, InputProps>(
   ({ label, error, className, id, ...props }, ref) => {
-    const inputId = id ?? label.toLowerCase().replace(/\s+/g, "-");
+    const inputId = id ?? (label ? label.toLowerCase().replace(/\s+/g, "-") : undefined);
     return (
       <div className="flex flex-col gap-1.5">
-        <label
-          htmlFor={inputId}
-          className="text-xs font-mono font-medium text-gray-400 uppercase tracking-wider"
-        >
-          {label}
-        </label>
+        {label && (
+          <label
+            htmlFor={inputId}
+            className="text-xs font-mono font-medium text-gray-400 uppercase tracking-wider"
+          >
+            {label}
+          </label>
+        )}
         <input
           ref={ref}
           id={inputId}
@@ -44,15 +46,17 @@ FormInput.displayName = "FormInput";
 
 export const FormTextarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ label, error, className, id, ...props }, ref) => {
-    const inputId = id ?? label.toLowerCase().replace(/\s+/g, "-");
+    const inputId = id ?? (label ? label.toLowerCase().replace(/\s+/g, "-") : undefined);
     return (
       <div className="flex flex-col gap-1.5">
-        <label
-          htmlFor={inputId}
-          className="text-xs font-mono font-medium text-gray-400 uppercase tracking-wider"
-        >
-          {label}
-        </label>
+        {label && (
+          <label
+            htmlFor={inputId}
+            className="text-xs font-mono font-medium text-gray-400 uppercase tracking-wider"
+          >
+            {label}
+          </label>
+        )}
         <textarea
           ref={ref}
           id={inputId}

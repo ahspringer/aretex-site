@@ -15,8 +15,8 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-near-black border-t border-white/5">
-      <div className="max-w-6xl mx-auto px-6 md:px-12">
+    <footer className="relative z-20 w-full mt-12 bg-near-black border-t border-white/10">
+      <div className="site-container">
         {/* Logo */}
         <div className="py-12 md:py-16 flex justify-center">
           <Image

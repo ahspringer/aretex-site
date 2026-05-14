@@ -12,10 +12,10 @@ export default function EngineeringPage() {
   return (
     <>
       <Nav />
-      <main>
+      <main className="site-main">
         {/* Page header */}
-        <section className="relative bg-near-black px-6 md:px-12 lg:px-24 pt-36 pb-4">
-          <div className="max-w-6xl mx-auto">
+        <section className="relative site-section pt-24 lg:pt-28 pb-4">
+          <div className="site-container">
             <p className="text-xs font-mono text-teal-500 uppercase tracking-[0.3em] mb-4">
               Engineering
             </p>

@@ -37,10 +37,10 @@ export default function EngineeringDomains() {
 
   return (
     <section
-      className="relative bg-near-black px-6 md:px-12 lg:px-24 py-24 lg:py-32"
+      className="relative site-section"
       aria-labelledby="engineering-domains-heading"
     >
-      <div className="max-w-6xl mx-auto flex flex-col gap-16">
+      <div className="site-container flex flex-col gap-16">
         <motion.div
           initial={animate ? "hidden" : "visible"}
           whileInView="visible"

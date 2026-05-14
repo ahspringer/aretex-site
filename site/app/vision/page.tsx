@@ -12,7 +12,7 @@ export default function VisionPage() {
   return (
     <>
       <Nav />
-      <main>
+      <main className="site-main">
         <VisionHero />
       </main>
       <Footer />

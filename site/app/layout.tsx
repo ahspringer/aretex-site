@@ -50,7 +50,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col site-shell">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

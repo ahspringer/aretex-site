@@ -11,7 +11,7 @@ export default function TeamPage() {
   return (
     <>
       <Nav />
-      <main className="pt-16">
+      <main className="site-main">
         <Team />
       </main>
       <Footer />

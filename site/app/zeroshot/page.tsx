@@ -11,7 +11,7 @@ export default function ZeroShotPage() {
   return (
     <>
       <Nav />
-      <main>
+      <main className="site-main">
         <ZeroShotContent />
       </main>
       <Footer />
