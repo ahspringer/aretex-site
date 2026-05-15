@@ -62,7 +62,7 @@ export default function Hero() {
       setSubmitted(true);
       reset();
     } catch {
-      setSubmitError("Form is unavailable right now. Please try again shortly.");
+      setSubmitError("Form is unavailable right now. Please reach out to contact@aretexlabs.com");
     }
   }
 

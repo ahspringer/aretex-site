@@ -44,7 +44,7 @@ export default function Investors() {
       setSubmitted(true);
       reset();
     } catch {
-      setSubmitError("Form is unavailable right now. Please try again shortly.");
+      setSubmitError("Form is unavailable right now. Please reach out to invest@aretexlabs.com");
     }
   }
 
