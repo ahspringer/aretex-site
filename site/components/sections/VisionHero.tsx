@@ -32,7 +32,7 @@ const codeItems = [
     number: "05",
     title: "Every dollar serves the mission.",
     enforcement:
-      "Leadership is a responsibility, not a perk. We enforce that at every echelon and with every interaction.",
+      "We optimize for results, not overhead. We enforce that at every echelon - leadership is a responsibility, not a perk.",
   },
 ];
 
