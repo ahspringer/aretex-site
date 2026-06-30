@@ -4,32 +4,49 @@ import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-const pages = [
+const pillars = [
   {
-    label: "Vision",
-    href: "/vision",
-    description: "Our thesis, our values, and why we exist.",
+    title: "What",
+    text: "ZeroShot is an at-home precision training platform for long-range shooters.",
   },
   {
-    label: "Engineering",
-    href: "/engineering",
-    description: "The domains we build for.",
+    title: "How",
+    text: "We combine optics-aware hardware, simulation, and fast iteration in one stack.",
   },
   {
-    label: "Team",
-    href: "/team",
-    description: "The co-founders building Aretex Labs.",
+    title: "Why",
+    text: "Range access is limited. Elite snipers need a better way to train between range days.",
+  },
+];
+
+const workflow = [
+  {
+    number: "01",
+    title: "Mount",
+    detail: "Attach to your existing setup.",
   },
   {
-    label: "ZeroShot",
-    href: "/zeroshot",
-    description: "Our first product. In development.",
+    number: "02",
+    title: "Calibrate",
+    detail: "Align to your rifle and optic profile.",
   },
   {
-    label: "Investors",
-    href: "/investors",
-    description: "The opportunity and where we're headed.",
+    number: "03",
+    title: "Train",
+    detail: "Run high-frequency reps with structured feedback.",
   },
+  {
+    number: "04",
+    title: "Improve",
+    detail: "Review trends and close skill gaps between range days.",
+  },
+];
+
+const capabilities = [
+  "Modeling & simulation",
+  "Optics + HMI",
+  "Rapid prototyping",
+  "Sensor fusion",
 ];
 
 export default function HomeHero() {
@@ -37,92 +54,140 @@ export default function HomeHero() {
   const animate = !prefersReducedMotion;
 
   return (
-    <section
-      className="relative min-h-[calc(100vh-4rem)] flex flex-col justify-center overflow-hidden"
-      aria-label="Welcome"
-    >
-      <div className="relative site-container py-24 lg:py-28 w-full">
+    <section className="relative overflow-hidden" aria-label="Welcome">
+      <div className="site-container py-20 lg:py-24">
         <div className="flex flex-col gap-16">
-          {/* Wordmark / eyebrow */}
-          <motion.p
-            className="text-xs font-mono text-teal-500 uppercase tracking-[0.3em]"
-            initial={animate ? { opacity: 0 } : false}
-            animate={{ opacity: 1 }}
+          <motion.div
+            className="flex flex-col gap-8 max-w-5xl"
+            initial={animate ? { opacity: 0, y: 24 } : false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="text-xs font-mono text-teal-500 uppercase tracking-[0.3em]">Introducing ZeroShot VR</p>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[0.92] tracking-tight">
+              Help us shape the future of precision shooting.
+            </h1>
+            <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-3xl">
+              We need your help defining the future of ZeroShot. Send an email to <Link href="mailto:contact@aretexlabs.com" className="text-teal-400">contact@aretexlabs.com</Link> to provide 
+              feedback and be entered to win a free kit when we launch. Don't feel like contacting us but 
+              want to remain in the loop? Join our early access list and be the first to know when we launch.
+            </p>
+            <div className="flex flex-wrap gap-4 pt-2">
+              <Link
+                href="/zeroshot"
+                className="inline-flex items-center gap-2 rounded-md bg-teal-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-teal-500"
+              >
+                Learn More
+                <ArrowRight size={14} aria-hidden="true" />
+              </Link>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="grid gap-4 md:grid-cols-3"
+            initial={animate ? { opacity: 0, y: 20 } : false}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5 }}
           >
-            Aretex Labs
-          </motion.p>
-
-          {/* Headline */}
-          <div className="flex flex-col gap-4 max-w-4xl">
-            <motion.h1
-              className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[0.95] tracking-tight"
-              initial={animate ? { opacity: 0, y: 30 } : false}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              Building systems that {" "}
-              <span className="text-teal-400">elevate the user.</span>
-            </motion.h1>
-            <motion.p
-              className="text-lg md:text-xl text-gray-400 leading-relaxed max-w-2xl"
-              initial={animate ? { opacity: 0, y: 20 } : false}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.25 }}
-            >
-              We believe every person carries elite potential. Our job is to
-              build the technology that helps them reach it.
-            </motion.p>
-          </div>
-
-          {/* Page cards */}
-          <motion.div
-            className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4"
-            initial={animate ? { opacity: 0, y: 20 } : false}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            {pages.map((page) => (
-              <Link
-                key={page.href}
-                href={page.href}
-                className="group flex flex-col gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.05] hover:border-teal-600/30 p-6 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
+            {pillars.map((item, idx) => (
+              <motion.div
+                key={item.title}
+                className="rounded-xl border border-white/10 bg-white/[0.03] p-6"
+                initial={animate ? { opacity: 0, y: 16 } : false}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, delay: idx * 0.08 }}
               >
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono text-teal-500 uppercase tracking-widest">
-                    {page.label}
-                  </span>
-                  <ArrowRight
-                    size={14}
-                    className="text-gray-600 group-hover:text-teal-400 group-hover:translate-x-0.5 transition-all duration-200"
-                    aria-hidden="true"
-                  />
-                </div>
-                <p className="text-sm text-gray-400 leading-relaxed">
-                  {page.description}
-                </p>
-              </Link>
+                <p className="text-xs font-mono uppercase tracking-widest text-teal-500">{item.title}</p>
+                <p className="mt-3 text-sm text-gray-300 leading-relaxed">{item.text}</p>
+              </motion.div>
             ))}
           </motion.div>
 
-          {/* Subtle divider line */}
-          <motion.div
-            className="h-px bg-white/[0.06] max-w-xs origin-left"
-            initial={animate ? { opacity: 0, scaleX: 0 } : false}
-            animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            aria-hidden="true"
-          />
+          <section id="audiences" className="grid gap-5 lg:grid-cols-2">
+            <motion.div
+              className="rounded-2xl border border-teal-600/30 bg-teal-600/10 p-7"
+              initial={animate ? { opacity: 0, y: 16 } : false}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45 }}
+            >
+              <p className="text-xs font-mono uppercase tracking-widest text-teal-400">The Product</p>
+              <h2 className="mt-3 text-2xl md:text-3xl font-bold text-white">ZeroShot</h2>
+              <p className="mt-3 text-sm text-gray-200 leading-relaxed">
+                For shooters who need structured repetition between range sessions.
+              </p>
+              <div className="mt-6">
+                <Link
+                  href="/zeroshot"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-teal-300 hover:text-teal-200"
+                >
+                  See product details
+                  <ArrowRight size={14} aria-hidden="true" />
+                </Link>
+              </div>
+            </motion.div>
 
-          {/* Footer-level aside */}
-          <motion.p
-            className="text-[11px] font-mono text-gray-600 uppercase tracking-[0.25em]"
-            initial={animate ? { opacity: 0 } : false}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.75 }}
+            <motion.div
+              id="build-with-us"
+              className="rounded-2xl border border-white/10 bg-white/[0.03] p-7"
+              initial={animate ? { opacity: 0, y: 16 } : false}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: 0.08 }}
+            >
+              <p className="text-xs font-mono uppercase tracking-widest text-copper">The Process</p>
+              <h2 className="mt-3 text-2xl md:text-3xl font-bold text-white">Rapid Engineering Lab</h2>
+              <p className="mt-3 text-sm text-gray-300 leading-relaxed">
+                For teams that need complex prototypes designed, built, and iterated with urgency.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                {capabilities.map((capability) => (
+                  <span
+                    key={capability}
+                    className="rounded-full border border-white/10 px-3 py-1 text-xs font-mono uppercase tracking-wider text-gray-300"
+                  >
+                    {capability}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-6">
+                <Link
+                  href="/engineering"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-teal-300 hover:text-teal-200"
+                >
+                  View engineering domains
+                  <ArrowRight size={14} aria-hidden="true" />
+                </Link>
+              </div>
+            </motion.div>
+          </section>
+
+          <motion.section
+            id="cta"
+            className="rounded-2xl border border-white/10 bg-white/[0.02] p-8 md:p-10"
+            initial={animate ? { opacity: 0, y: 16 } : false}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5 }}
           >
-            Aretex Labs, LLC · Alabama · Stealth Mode
-          </motion.p>
+            <p className="text-xs font-mono uppercase tracking-widest text-teal-500">Get Involved</p>
+            <h2 className="mt-3 text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+              Interested in collaborating?
+            </h2>
+            <p className="mt-3 text-sm text-gray-300 leading-relaxed">
+              At Aretex Labs, we're always looking to connect with passionate individuals and teams who need help building something new. Whether you're a shooter with an idea for a product, a company in need of rapid prototyping, or just someone who wants to be part of the journey, we'd love to hear from you. Our engineers are experts in modeling & simulation, optics, HMI, rapid prototyping, and sensor fusion. If you have a project in mind or just want to chat about all things shooting and technology, don't hesitate to reach out. Contact us directly to discuss how we can work together.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center rounded-md border border-teal-600 px-6 py-3 text-sm font-semibold text-teal-400 transition hover:bg-teal-600/10"
+              >
+                Request Engineering Call
+              </Link>
+            </div>
+          </motion.section>
         </div>
       </div>
     </section>
