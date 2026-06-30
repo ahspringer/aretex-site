@@ -11,7 +11,7 @@ const pillars = [
   },
   {
     title: "How",
-    text: "We combine optics-aware hardware, simulation, and fast iteration in one stack.",
+    text: "We combine precision hardware, accurate simulation, and professional-grade feedback in one system.",
   },
   {
     title: "Why",
