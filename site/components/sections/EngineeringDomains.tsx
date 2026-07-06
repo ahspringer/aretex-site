@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { Cpu, Crosshair, Wrench, Eye } from "lucide-react";
+import SectionWrapper from "@/components/ui/SectionWrapper";
 import { fadeUp, staggerContainer, viewportOptions } from "@/lib/motion";
 
 const domains = [
@@ -36,27 +37,47 @@ export default function EngineeringDomains() {
   const animate = !prefersReducedMotion;
 
   return (
-    <section
-      className="relative site-section"
-      aria-labelledby="engineering-domains-heading"
-    >
-      <div className="site-container flex flex-col gap-16">
+    <SectionWrapper id="engineering">
+      <motion.div
+        initial={animate ? "hidden" : "visible"}
+        whileInView="visible"
+        viewport={viewportOptions}
+        variants={animate ? staggerContainer : {}}
+        className="flex flex-col gap-14"
+      >
         <motion.div
-          initial={animate ? "hidden" : "visible"}
-          whileInView="visible"
-          viewport={viewportOptions}
+          variants={animate ? fadeUp : {}}
+          className="max-w-2xl"
+        >
+          <p className="text-xs font-mono text-teal-500 uppercase tracking-[0.3em] mb-4">
+            Engineering
+          </p>
+          <h1
+            id="engineering-heading"
+            className="text-5xl md:text-6xl font-extrabold text-white leading-[0.95] tracking-tight"
+          >
+            Precision across the stack.
+          </h1>
+          <p className="mt-6 text-base md:text-lg text-gray-400 leading-relaxed">
+            We turn hard technical problems into shipped products. From research and
+            system design to prototype and production, we help ambitious teams move
+            faster, build smarter, and deliver with confidence.
+          </p>
+        </motion.div>
+
+        <motion.div
           variants={animate ? fadeUp : {}}
           className="max-w-2xl"
         >
           <p className="text-xs font-mono text-teal-500 uppercase tracking-widest mb-4">
             Domains
           </p>
-          <h2
+          {/* <h2
             id="engineering-domains-heading"
             className="text-4xl md:text-5xl font-extrabold text-white leading-tight tracking-tight"
           >
             What we build.
-          </h2>
+          </h2> */}
           <p className="mt-6 text-base text-gray-400 leading-relaxed">
             Aretex Labs operates across a focused set of hardware and software
             engineering disciplines.
@@ -102,7 +123,7 @@ export default function EngineeringDomains() {
             );
           })}
         </motion.div>
-      </div>
-    </section>
+      </motion.div>
+    </SectionWrapper>
   );
 }

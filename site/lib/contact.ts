@@ -10,6 +10,10 @@ export type ContactPayload =
   | {
       type: "presale";
       email: string;
+    }
+  | {
+      type: "engineering";
+      email: string;
     };
 
 export async function submitContact(payload: ContactPayload): Promise<void> {
