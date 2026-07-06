@@ -15,7 +15,7 @@ export default function AboutPage() {
       <Nav />
       <main className="site-main">
         <VisionHero />
-        <Team />
+        {/* <Team /> */}
       </main>
       <Footer />
     </>
