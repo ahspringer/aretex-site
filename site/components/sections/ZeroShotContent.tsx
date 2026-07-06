@@ -39,7 +39,7 @@ export default function ZeroShotContent() {
               className="text-5xl md:text-6xl font-extrabold text-white leading-[0.95] tracking-tight"
               variants={animate ? fadeUp : {}}
             >
-              ZeroShot
+              ZeroShot VR
             </motion.h1>
 
             <motion.p

@@ -105,65 +105,6 @@ export default function HomeHero() {
             ))}
           </motion.div>
 
-          <section id="audiences" className="grid gap-5 lg:grid-cols-2">
-            <motion.div
-              className="rounded-2xl border border-teal-600/30 bg-teal-600/10 p-7"
-              initial={animate ? { opacity: 0, y: 16 } : false}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.45 }}
-            >
-              <p className="text-xs font-mono uppercase tracking-widest text-teal-400">The Product</p>
-              <h2 className="mt-3 text-2xl md:text-3xl font-bold text-white">ZeroShot</h2>
-              <p className="mt-3 text-sm text-gray-200 leading-relaxed">
-                For shooters who need structured repetition between range sessions.
-              </p>
-              <div className="mt-6">
-                <Link
-                  href="/zeroshot"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-teal-300 hover:text-teal-200"
-                >
-                  See product details
-                  <ArrowRight size={14} aria-hidden="true" />
-                </Link>
-              </div>
-            </motion.div>
-
-            <motion.div
-              id="build-with-us"
-              className="rounded-2xl border border-white/10 bg-white/[0.03] p-7"
-              initial={animate ? { opacity: 0, y: 16 } : false}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.45, delay: 0.08 }}
-            >
-              <p className="text-xs font-mono uppercase tracking-widest text-copper">The Process</p>
-              <h2 className="mt-3 text-2xl md:text-3xl font-bold text-white">Rapid Engineering Lab</h2>
-              <p className="mt-3 text-sm text-gray-300 leading-relaxed">
-                For teams that need complex prototypes designed, built, and iterated with urgency.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                {capabilities.map((capability) => (
-                  <span
-                    key={capability}
-                    className="rounded-full border border-white/10 px-3 py-1 text-xs font-mono uppercase tracking-wider text-gray-300"
-                  >
-                    {capability}
-                  </span>
-                ))}
-              </div>
-              <div className="mt-6">
-                <Link
-                  href="/"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-teal-300 hover:text-teal-200"
-                >
-                  View engineering domains
-                  <ArrowRight size={14} aria-hidden="true" />
-                </Link>
-              </div>
-            </motion.div>
-          </section>
-
           <motion.section
             id="cta"
             className="rounded-2xl border border-white/10 bg-white/[0.02] p-8 md:p-10"
