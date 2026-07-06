@@ -7,6 +7,10 @@ import EngineeringMediaStrip, {
   type EngineeringMediaEntry,
 } from "@/components/sections/EngineeringMediaStrip";
 import { fadeUp, staggerContainer, viewportOptions } from "@/lib/motion";
+import { withBasePath } from "@/lib/assets";
+
+// Constant image location for only one background image while retaining the flexibility to add more later.
+const defaultMediaSrc = withBasePath("/images/3d-print-build.png");
 
 // Designers: put assets in public/images/engineering/build and set imageSrc or videoSrc.
 const buildCapabilities: EngineeringMediaEntry[] = [
@@ -17,7 +21,7 @@ const buildCapabilities: EngineeringMediaEntry[] = [
     bodyText:
       "Additive manufacturing turns designs into functional parts on demand, no tooling or lead time required. Local prototyping keeps defense programs moving at the speed of need.",
     alt: "Additive manufacturing setup",
-    imageSrc: undefined,
+    imageSrc: defaultMediaSrc,
     gradientClass:
       "bg-gradient-to-br from-zinc-950 via-teal-600/45 to-cyan-500/35",
   },
@@ -37,32 +41,32 @@ const buildCapabilities: EngineeringMediaEntry[] = [
     bodyText:
       "From schematic to fabricated board, PCB workflows are engineered for speed, reliability, and fast integration into larger systems.",
     alt: "PCB boards and reflow setup",
-    imageSrc: undefined,
+    imageSrc: defaultMediaSrc,
     gradientClass:
       "bg-gradient-to-br from-black via-emerald-600/45 to-teal-500/35",
   },
   {
     id: "electronics-assembly",
-    label: "Mechanical/electrical assembly",
+    label: "assembly",
     caption: "Electronics assembly, soldering, and system bring-up",
     bodyText:
       "Mechanical and electrical assembly happens under one roof, reducing handoff friction and accelerating bring-up and verification.",
     alt: "Electronics assembly bench",
-    imageSrc: undefined,
+    imageSrc: defaultMediaSrc,
     gradientClass:
       "bg-gradient-to-br from-zinc-950 via-indigo-600/45 to-sky-500/35",
   },
-  {
-    id: "prototype-pilot",
-    label: "Prototype to pilot builds",
-    caption: "From first article through pilot-level hardware builds",
-    bodyText:
-      "Prototype and pilot builds are structured for rapid learning, so each build cycle improves manufacturability and field readiness.",
-    alt: "Prototype hardware build line",
-    imageSrc: undefined,
-    gradientClass:
-      "bg-gradient-to-br from-slate-900 via-copper/50 to-red-500/35",
-  },
+  // {
+  //   id: "prototype-pilot",
+  //   label: "Prototype to pilot builds",
+  //   caption: "From first article through pilot-level hardware builds",
+  //   bodyText:
+  //     "Prototype and pilot builds are structured for rapid learning, so each build cycle improves manufacturability and field readiness.",
+  //   alt: "Prototype hardware build line",
+  //   imageSrc: undefined,
+  //   gradientClass:
+  //     "bg-gradient-to-br from-slate-900 via-copper/50 to-red-500/35",
+  // },
 ];
 
 const defaultBuildBody =
@@ -73,7 +77,7 @@ const defaultBuildMedia: EngineeringMediaEntry = {
   label: "Overview",
   caption: "Select a tag to preview a focused build capability",
   alt: "Build capability placeholder",
-  imageSrc: undefined,
+  imageSrc: defaultMediaSrc,
   gradientClass: "bg-gradient-to-br from-zinc-950 via-teal-600/35 to-copper/25",
 };
 
@@ -100,6 +104,7 @@ export default function BuildIt() {
         ariaLabel="Build media background"
         layout="background"
         showMeta={false}
+        instantSwap  // Remove later for fade between media entries once there is more than one.
       />
 
       <div className="site-container pb-16 md:pb-20 lg:pb-24">
@@ -126,7 +131,7 @@ export default function BuildIt() {
                 id="build-it-heading"
                 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[0.9] tracking-tight max-w-4xl"
               >
-                Precise, responsive manufacturing.
+                Precision prototypes.
               </h2>
               <p className="mt-6 text-base md:text-lg text-white leading-relaxed max-w-3xl">
                 {activeBody}
@@ -134,16 +139,16 @@ export default function BuildIt() {
             </div>
           </motion.div>
 
-          <motion.div variants={animate ? fadeUp : {}} className="grid md:grid-cols-2 gap-3 relative z-10">
+          <motion.div variants={animate ? fadeUp : {}} className="grid md:grid-cols-3 gap-3 relative z-10">
             {buildCapabilities.map((item) => (
               <button
                 key={item.id}
                 type="button"
                 onClick={() => setActiveMediaId(item.id)}
-                className={`rounded-lg border px-4 py-3 text-sm font-semibold text-left transition-colors duration-200 ${
+                className={`rounded-full border px-4 py-2 text-xs font-mono tracking-[0.18em] uppercase text-left transition-colors duration-200 ${
                   activeMediaId === item.id
-                    ? "border-teal-400/60 bg-teal-500/18 text-white"
-                    : "border-white/12 bg-white/[0.03] text-gray-200 hover:border-teal-400/40 hover:text-white"
+                    ? "border-teal-400/70 bg-teal-500/30 text-white"
+                    : "border-white/25 bg-white/[0.12] text-gray-100 hover:border-teal-400/55 hover:bg-white/[0.16] hover:text-white"
                 }`}
                 aria-pressed={activeMediaId === item.id}
               >

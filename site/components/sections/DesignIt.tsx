@@ -7,6 +7,10 @@ import EngineeringMediaStrip, {
   type EngineeringMediaEntry,
 } from "@/components/sections/EngineeringMediaStrip";
 import { fadeUp, staggerContainer, viewportOptions } from "@/lib/motion";
+import { withBasePath } from "@/lib/assets";
+
+// Constant image location for only one background image while retaining the flexibility to add more later.
+const defaultMediaSrc = withBasePath("/images/pcb-schematic.png");
 
 // Designers: put assets in public/images/engineering/design and set imageSrc or videoSrc.
 const designMedia: EngineeringMediaEntry[] = [
@@ -17,7 +21,7 @@ const designMedia: EngineeringMediaEntry[] = [
     bodyText:
       "Aerospace design at Aretex starts with mission constraints, then moves into CAD packages that are manufacturable, testable, and ready for rapid iteration. Our test engineers and manufacturing teams are involved at every step.",
     alt: "Aerospace CAD visualization",
-    imageSrc: undefined,
+    imageSrc: defaultMediaSrc,
     gradientClass:
       "bg-gradient-to-br from-slate-800 via-teal-700/60 to-cyan-500/40",
   },
@@ -28,7 +32,7 @@ const designMedia: EngineeringMediaEntry[] = [
     bodyText:
       "Defense-focused design decisions are built around operator realities, field constraints, and integration requirements so systems perform when stakes are highest. We work with operators and design to their needs, not the other way around.",
     alt: "Defense systems concept render",
-    imageSrc: undefined,
+    imageSrc: defaultMediaSrc,
     gradientClass:
       "bg-gradient-to-br from-zinc-900 via-copper/50 to-amber-500/35",
   },
@@ -39,7 +43,7 @@ const designMedia: EngineeringMediaEntry[] = [
     bodyText:
       "At Aretex, we believe that human performance systems must elevate the user via human-centric designs, intelligent feedback, and measurable training quality as primary design objectives. If the design doesn't serve the user, it doesn't serve the mission.",
     alt: "Human performance assembly model",
-    imageSrc: undefined,
+    imageSrc: defaultMediaSrc,
     gradientClass:
       "bg-gradient-to-br from-slate-900 via-emerald-600/45 to-sky-600/35",
   },
@@ -50,7 +54,7 @@ const designMedia: EngineeringMediaEntry[] = [
     bodyText:
       "We design autonomous systems with rapid concept-to-geometry iterations, so that mission intent carries from the first sketch to the final prototype. Our sensor fusion, GN&C, and autonomy design is grounded in first-principles thinking.",
     alt: "Autonomous systems CAD flythrough",
-    imageSrc: undefined,
+    imageSrc: defaultMediaSrc,
     gradientClass:
       "bg-gradient-to-br from-black via-indigo-600/45 to-teal-500/35",
   },
@@ -64,7 +68,7 @@ const defaultDesignMedia: EngineeringMediaEntry = {
   label: "Overview",
   caption: "Select a tag to preview a focused design capability",
   alt: "Design capability placeholder",
-  imageSrc: undefined,
+  imageSrc: defaultMediaSrc,
   gradientClass: "bg-gradient-to-br from-zinc-900 via-teal-700/45 to-copper/35",
 };
 
@@ -91,6 +95,7 @@ export default function DesignIt() {
         ariaLabel="Design media background"
         layout="background"
         showMeta={false}
+        instantSwap  // Remove later for fade between media entries once there is more than one.
       />
 
       <div className="site-container pb-16 md:pb-20 lg:pb-24">

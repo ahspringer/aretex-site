@@ -7,6 +7,10 @@ import EngineeringMediaStrip, {
   type EngineeringMediaEntry,
 } from "@/components/sections/EngineeringMediaStrip";
 import { fadeUp, staggerContainer, viewportOptions } from "@/lib/motion";
+import { withBasePath } from "@/lib/assets";
+
+// Constant image location for only one background image while retaining the flexibility to add more later.
+const defaultMediaSrc = withBasePath("/images/ray-tracing.png");
 
 // Designers: put assets in public/images/engineering/perfect and set imageSrc or videoSrc.
 const analysisDomains: EngineeringMediaEntry[] = [
@@ -17,7 +21,7 @@ const analysisDomains: EngineeringMediaEntry[] = [
     bodyText:
       "Electrical analysis verifies signal integrity, power distribution, and component interaction before integration, reducing rework during bring-up.",
     alt: "Electrical systems analysis view",
-    imageSrc: undefined,
+    imageSrc: defaultMediaSrc,
     gradientClass:
       "bg-gradient-to-br from-slate-900 via-amber-500/35 to-rose-500/35",
   },
@@ -28,7 +32,7 @@ const analysisDomains: EngineeringMediaEntry[] = [
     bodyText:
       "Optical studies refine light path behavior and performance tradeoffs early, so system-level decisions are made with confidence.",
     alt: "Optical simulation view",
-    imageSrc: undefined,
+    imageSrc: defaultMediaSrc,
     gradientClass:
       "bg-gradient-to-br from-zinc-900 via-orange-500/45 to-yellow-400/35",
   },
@@ -39,7 +43,7 @@ const analysisDomains: EngineeringMediaEntry[] = [
     bodyText:
       "Structural analysis exposes stress concentrations, deformation risk, and fatigue concerns before hardware is cut.",
     alt: "Structural finite element stress plot",
-    imageSrc: undefined,
+    imageSrc: defaultMediaSrc,
     gradientClass:
       "bg-gradient-to-br from-slate-950 via-blue-600/40 to-cyan-500/35",
   },
@@ -50,7 +54,7 @@ const analysisDomains: EngineeringMediaEntry[] = [
     bodyText:
       "Aerodynamic modeling informs geometry updates for stability and performance in realistic operating conditions.",
     alt: "Aerodynamics flow field visualization",
-    imageSrc: undefined,
+    imageSrc: defaultMediaSrc,
     gradientClass:
       "bg-gradient-to-br from-slate-900 via-sky-500/40 to-teal-500/35",
   },
@@ -61,7 +65,7 @@ const analysisDomains: EngineeringMediaEntry[] = [
     bodyText:
       "Test and evaluation ties simulation to reality through measured results, tightening the loop between design intent and field behavior.",
     alt: "Test and evaluation dashboard",
-    imageSrc: undefined,
+    imageSrc: defaultMediaSrc,
     gradientClass:
       "bg-gradient-to-br from-zinc-950 via-emerald-500/35 to-cyan-500/30",
   },
@@ -72,7 +76,7 @@ const analysisDomains: EngineeringMediaEntry[] = [
     bodyText:
       "Operational analysis keeps engineering aligned to real user workflows, ensuring technical decisions support mission outcomes.",
     alt: "Concept of operations test session",
-    imageSrc: undefined,
+    imageSrc: defaultMediaSrc,
     gradientClass:
       "bg-gradient-to-br from-black via-indigo-600/40 to-copper/35",
   },
@@ -86,7 +90,7 @@ const defaultPerfectMedia: EngineeringMediaEntry = {
   label: "Overview",
   caption: "Select a tag to preview a focused analysis capability",
   alt: "Analysis capability placeholder",
-  imageSrc: undefined,
+  imageSrc: defaultMediaSrc,
   gradientClass: "bg-gradient-to-br from-zinc-950 via-copper/35 to-teal-500/25",
 };
 
@@ -113,6 +117,7 @@ export default function PerfectIt() {
         ariaLabel="Perfect media background"
         layout="background"
         showMeta={false}
+        instantSwap  // Remove later for fade between media entries once there is more than one.
       />
 
       <div className="site-container pb-16 md:pb-20 lg:pb-24">
@@ -157,10 +162,10 @@ export default function PerfectIt() {
                 <button
                   type="button"
                   onClick={() => setActiveMediaId(item.id)}
-                  className={`w-full rounded-lg border px-4 py-3 text-sm font-semibold text-left transition-colors duration-200 ${
+                  className={`w-full rounded-full border px-4 py-2 text-xs font-mono tracking-[0.18em] uppercase text-left transition-colors duration-200 ${
                     activeMediaId === item.id
-                      ? "border-copper-light/60 bg-copper/15 text-white"
-                      : "border-white/12 bg-white/[0.03] text-gray-200 hover:border-copper-light/40 hover:text-white"
+                      ? "border-copper-light/70 bg-copper/30 text-white"
+                      : "border-white/25 bg-white/[0.12] text-gray-100 hover:border-copper-light/55 hover:bg-white/[0.16] hover:text-white"
                   }`}
                   aria-pressed={activeMediaId === item.id}
                 >

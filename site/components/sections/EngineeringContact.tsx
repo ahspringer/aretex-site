@@ -46,7 +46,7 @@ export default function EngineeringContact() {
   return (
     <section
       id="contact"
-      className="relative w-full min-h-[70svh] bg-[#040404]"
+      className="relative w-full min-h-[40svh] bg-gradient-to-br from-gray-950 via-teal-500/45 to-orange-800/50"
       aria-labelledby="engineering-contact-heading"
     >
       <div className="site-container py-16 md:py-20 lg:py-24">

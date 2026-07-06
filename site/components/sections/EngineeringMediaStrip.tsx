@@ -23,6 +23,7 @@ type EngineeringMediaStripProps = {
   ariaLabel: string;
   layout?: "strip" | "background";
   showMeta?: boolean;
+  instantSwap?: boolean;
   className?: string;
 };
 
@@ -32,6 +33,7 @@ export default function EngineeringMediaStrip({
   ariaLabel,
   layout = "strip",
   showMeta = true,
+  instantSwap = false,
   className,
 }: EngineeringMediaStripProps) {
   const hasVideo = Boolean(entry.videoSrc);
@@ -50,15 +52,8 @@ export default function EngineeringMediaStrip({
       )}
       aria-label={ariaLabel}
     >
-      <AnimatePresence initial={false} mode="wait">
-        <motion.div
-          key={`${entry.id}-${mediaKind}`}
-          className="absolute inset-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.35, ease: "easeOut" }}
-        >
+      {instantSwap ? (
+        <div key={`${entry.id}-${mediaKind}`} className="absolute inset-0">
           {hasVideo ? (
             <video
               className="h-full w-full object-cover"
@@ -83,8 +78,44 @@ export default function EngineeringMediaStrip({
           ) : (
             <div className={`absolute inset-0 ${entry.gradientClass}`} aria-hidden="true" />
           )}
-        </motion.div>
-      </AnimatePresence>
+        </div>
+      ) : (
+        <AnimatePresence initial={false} mode="wait">
+          <motion.div
+            key={`${entry.id}-${mediaKind}`}
+            className="absolute inset-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+          >
+            {hasVideo ? (
+              <video
+                className="h-full w-full object-cover"
+                src={entry.videoSrc}
+                poster={entry.posterSrc}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label={entry.alt}
+              />
+            ) : hasImage ? (
+              <Image
+                src={entry.imageSrc as string}
+                alt={entry.alt}
+                fill
+                sizes="100vw"
+                className="object-cover"
+                priority={false}
+              />
+            ) : (
+              <div className={`absolute inset-0 ${entry.gradientClass}`} aria-hidden="true" />
+            )}
+          </motion.div>
+        </AnimatePresence>
+      )}
 
       <div
         className="absolute inset-0 bg-[radial-gradient(80%_120%_at_0%_0%,rgba(20,184,166,0.24),rgba(0,0,0,0))]"
