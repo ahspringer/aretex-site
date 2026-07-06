@@ -13,6 +13,8 @@ const primaryLinks = [
   { label: "Resources", href: "/resources" },
 ];
 
+const desktopNavItemClass = "inline-flex h-5 items-center text-xs font-medium leading-none tracking-wider uppercase transition-colors duration-200";
+
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -69,7 +71,7 @@ export default function Nav() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-xs font-medium tracking-wider uppercase transition-colors duration-200 ${
+                  className={`${desktopNavItemClass} ${
                     active ? "text-white" : "text-gray-400 hover:text-white"
                   }`}
                 >
@@ -81,7 +83,7 @@ export default function Nav() {
             <div className="relative group">
               <button
                 type="button"
-                className={`inline-flex items-center gap-1 text-xs font-medium tracking-wider uppercase transition-colors duration-200 ${
+                className={`${desktopNavItemClass} appearance-none border-0 bg-transparent p-0 m-0 gap-1 -translate-y-px ${
                   pathname === "/zeroshot"
                     ? "text-white"
                     : "text-gray-400 hover:text-white"
@@ -89,11 +91,15 @@ export default function Nav() {
                 aria-haspopup="menu"
                 aria-expanded="false"
               >
-                Products
-                <ChevronDown size={14} aria-hidden="true" />
+                <span className="leading-none">Products</span>
+                <ChevronDown
+                  size={12}
+                  className="h-3 w-3 shrink-0 self-center"
+                  aria-hidden="true"
+                />
               </button>
 
-              <div className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 min-w-[12rem] -translate-x-1/2 rounded-lg border border-white/10 bg-near-black/95 p-2 opacity-0 shadow-xl transition-all duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+              <div className="pointer-events-none absolute left-1/2 top-full z-20 min-w-[12rem] -translate-x-1/2 rounded-lg border border-white/10 bg-near-black/95 p-2 opacity-0 shadow-xl transition-all duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
                 <Link
                   href="/zeroshot"
                   className="block rounded-md px-3 py-2 text-xs font-medium uppercase tracking-wider text-gray-300 transition-colors hover:bg-white/5 hover:text-white"
@@ -105,7 +111,7 @@ export default function Nav() {
 
             <Link
               href="/investors"
-              className={`text-xs font-medium tracking-wider uppercase transition-colors duration-200 ${
+              className={`${desktopNavItemClass} ${
                 pathname === "/investors" ? "text-white" : "text-gray-400 hover:text-white"
               }`}
             >
