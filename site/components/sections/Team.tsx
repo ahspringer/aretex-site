@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import Link from "next/link";
 import Image from "next/image";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import { fadeUp, staggerContainer, viewportOptions } from "@/lib/motion";
@@ -62,7 +61,7 @@ export default function Team() {
       >
         <motion.div variants={animate ? fadeUp : {}} className="max-w-3xl">
           <p className="text-xs font-mono text-teal-500 uppercase tracking-widest mb-4">
-            The Team
+            Company Leadership
           </p>
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[0.95] tracking-tight">
             Three founders. One mission.
@@ -133,108 +132,6 @@ export default function Team() {
             </motion.article>
           ))}
         </div>
-
-        <motion.div
-          initial={animate ? "hidden" : "visible"}
-          whileInView="visible"
-          viewport={viewportOptions}
-          variants={animate ? fadeUp : {}}
-          className="mt-20 max-w-2xl"
-        >
-          <p className="text-xs font-mono text-teal-500 uppercase tracking-widest mb-4">
-            How we operate
-          </p>
-          <h3 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight tracking-tight">
-            The Aretex Code
-          </h3>
-          <p className="mt-6 text-base text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl">
-            These aren&apos;t statements on a wall. They&apos;re codified into how we operate, embedded in every decision we make, and tested in every meeting.{" "}
-            <Link href="/vision" className="text-teal-500 hover:text-teal-400 underline underline-offset-4 transition-colors">
-              Read more about our Vision
-            </Link>
-            .
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={animate ? "hidden" : "visible"}
-          whileInView="visible"
-          viewport={viewportOptions}
-          variants={
-            animate
-              ? {
-                  hidden: {},
-                  visible: {
-                    transition: {
-                      delayChildren: 0.15,
-                      staggerChildren: 0.25,
-                    },
-                  },
-                }
-              : {}
-          }
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-4"
-        >
-          {[
-            {
-              number: "01",
-              title: "Excellence takes precedence over pride",
-              description: "We give and receive feedback with humility.",
-            },
-            {
-              number: "02",
-              title: "There is always a hidden option C",
-              description: "We question assumptions with creativity.",
-            },
-            {
-              number: "03",
-              title: "We make asymmetric bets",
-              description: "Once committed, we go all in.",
-            },
-            {
-              number: "04",
-              title: "We serve the human behind the technology",
-              description: "Not the technology itself.",
-            },
-            {
-              number: "05",
-              title: "Every dollar serves the mission",
-              description: "We optimize for results, not overhead.",
-            },
-          ].map((value) => (
-            <motion.div
-              key={value.number}
-              variants={
-                animate
-                  ? {
-                      hidden: { opacity: 0, y: 28 },
-                      visible: {
-                        opacity: 1,
-                        y: 0,
-                        transition: { duration: 0.6, ease: "easeOut" },
-                      },
-                    }
-                  : {}
-              }
-              className="relative flex flex-col gap-4"
-            >
-              {/* Number */}
-              <span className="text-5xl font-extrabold font-mono text-teal-600/20 leading-none select-none tabular-nums">
-                {value.number}
-              </span>
-
-              {/* Copy */}
-              <div className="flex flex-col gap-3">
-                <h4 className="text-sm font-bold text-gray-900 dark:text-white leading-tight">
-                  {value.title}
-                </h4>
-                <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
-                  {value.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
       </motion.div>
     </SectionWrapper>
   );

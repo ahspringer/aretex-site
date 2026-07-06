@@ -1,6 +1,7 @@
 import Nav from "@/components/sections/Nav";
 import Footer from "@/components/sections/Footer";
 import ZeroShotContent from "@/components/sections/ZeroShotContent";
+import HomeHero from "@/components/sections/HomeHero";
 
 export const metadata = {
   title: "Aretex Labs | ZeroShot",
@@ -13,6 +14,7 @@ export default function ZeroShotPage() {
       <Nav />
       <main className="site-main">
         <ZeroShotContent />
+        <HomeHero />
       </main>
       <Footer />
     </>

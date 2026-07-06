@@ -154,7 +154,7 @@ export default function HomeHero() {
               </div>
               <div className="mt-6">
                 <Link
-                  href="/engineering"
+                  href="/"
                   className="inline-flex items-center gap-2 text-sm font-semibold text-teal-300 hover:text-teal-200"
                 >
                   View engineering domains
@@ -184,7 +184,7 @@ export default function HomeHero() {
                 href="/contact"
                 className="inline-flex items-center justify-center rounded-md border border-teal-600 px-6 py-3 text-sm font-semibold text-teal-400 transition hover:bg-teal-600/10"
               >
-                Request Engineering Call
+                Contact Us
               </Link>
             </div>
           </motion.section>

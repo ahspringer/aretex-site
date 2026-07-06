@@ -1,20 +1,10 @@
-import Nav from "@/components/sections/Nav";
-import Footer from "@/components/sections/Footer";
-import Team from "@/components/sections/Team";
+import { redirect } from "next/navigation";
 
 export const metadata = {
-  title: "Aretex Labs | Team",
-  description: "Meet the founding team behind Aretex Labs.",
+  title: "Aretex Labs | About",
+  description: "Redirecting to About.",
 };
 
 export default function TeamPage() {
-  return (
-    <>
-      <Nav />
-      <main className="site-main">
-        <Team />
-      </main>
-      <Footer />
-    </>
-  );
+  redirect("/about");
 }

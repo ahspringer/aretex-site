@@ -5,15 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { withBasePath } from "@/lib/assets";
 
-const navLinks = [
-  { label: "Vision", href: "/vision" },
-  { label: "Engineering", href: "/engineering" },
-  { label: "Team", href: "/team" },
-  { label: "ZeroShot", href: "/zeroshot" },
-  { label: "Investors", href: "/investors" },
+const primaryLinks = [
+  { label: "About", href: "/about" },
+  { label: "Resources", href: "/resources" },
 ];
 
 export default function Nav() {
@@ -59,15 +56,14 @@ export default function Nav() {
               aria-hidden="true"
             />
             <span className="text-white font-bold tracking-[0.2em] text-sm uppercase">
-              ARETEX
-              <span className="text-teal-400 mx-1">·</span>
-              LABS
+              ARETEX LABS
+              {/* <span className="text-teal-400 mx-1">·</span> */}
             </span>
           </Link>
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
-            {navLinks.map((link) => {
+            {primaryLinks.map((link) => {
               const active = pathname === link.href;
               return (
                 <Link
@@ -81,15 +77,49 @@ export default function Nav() {
                 </Link>
               );
             })}
+
+            <div className="relative group">
+              <button
+                type="button"
+                className={`inline-flex items-center gap-1 text-xs font-medium tracking-wider uppercase transition-colors duration-200 ${
+                  pathname === "/zeroshot"
+                    ? "text-white"
+                    : "text-gray-400 hover:text-white"
+                }`}
+                aria-haspopup="menu"
+                aria-expanded="false"
+              >
+                Products
+                <ChevronDown size={14} aria-hidden="true" />
+              </button>
+
+              <div className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 min-w-[12rem] -translate-x-1/2 rounded-lg border border-white/10 bg-near-black/95 p-2 opacity-0 shadow-xl transition-all duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+                <Link
+                  href="/zeroshot"
+                  className="block rounded-md px-3 py-2 text-xs font-medium uppercase tracking-wider text-gray-300 transition-colors hover:bg-white/5 hover:text-white"
+                >
+                  ZeroShot
+                </Link>
+              </div>
+            </div>
+
+            <Link
+              href="/investors"
+              className={`text-xs font-medium tracking-wider uppercase transition-colors duration-200 ${
+                pathname === "/investors" ? "text-white" : "text-gray-400 hover:text-white"
+              }`}
+            >
+              Investors
+            </Link>
           </nav>
 
           {/* Right controls */}
           <div className="hidden md:flex items-center gap-3">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center text-sm font-semibold tracking-wide transition-all duration-200 border border-teal-600 text-teal-400 hover:bg-teal-600/10 hover:shadow-[0_0_12px_rgba(13,148,136,0.3)] px-4 py-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
+              className="inline-flex items-center uppercase justify-center text-sm font-semibold tracking-wide transition-all duration-200 border border-teal-600 text-teal-400 hover:bg-teal-600/10 hover:shadow-[0_0_12px_rgba(13,148,136,0.3)] px-4 py-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
             >
-              Get Involved
+              contact us
             </Link>
           </div>
 
@@ -117,7 +147,7 @@ export default function Nav() {
             transition={{ duration: 0.25, ease: "easeInOut" }}
             className="fixed inset-0 z-40 bg-near-black flex flex-col items-center justify-center gap-8"
           >
-            {navLinks.map((link, i) => (
+            {primaryLinks.map((link, i) => (
               <motion.div
                 key={link.href}
                 initial={{ opacity: 0, y: 20 }}
@@ -132,10 +162,41 @@ export default function Nav() {
                 </Link>
               </motion.div>
             ))}
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: navLinks.length * 0.06 }}
+              transition={{ delay: primaryLinks.length * 0.06 }}
+              className="flex flex-col items-center gap-3"
+            >
+              <span className="text-xs font-mono uppercase tracking-[0.22em] text-gray-500">
+                Products
+              </span>
+              <Link
+                href="/zeroshot"
+                className="text-2xl font-bold text-gray-300 hover:text-white tracking-widest uppercase transition-colors"
+              >
+                ZeroShot
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: (primaryLinks.length + 1) * 0.06 }}
+            >
+              <Link
+                href="/investors"
+                className="text-2xl font-bold text-gray-300 hover:text-white tracking-widest uppercase transition-colors"
+              >
+                Investors
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: (primaryLinks.length + 2) * 0.06 }}
             >
               <Link
                 href="/contact"
