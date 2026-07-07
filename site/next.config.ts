@@ -1,9 +1,13 @@
+import path from "path";
 import type { NextConfig } from "next";
 
 const rawBasePath = process.env.PAGES_BASE_PATH || "";
 const basePath = rawBasePath === "/" ? "" : rawBasePath;
 
 const nextConfig: NextConfig = {
+  turbopack: {
+    root: path.join(__dirname),
+  },
   output: "export",
   trailingSlash: true,
   basePath,

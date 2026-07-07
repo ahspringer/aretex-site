@@ -72,15 +72,6 @@ export default function HomeHero() {
               feedback and be entered to win a free kit when we launch. Don't feel like contacting us but 
               want to remain in the loop? Join our early access list and be the first to know when we launch.
             </p>
-            <div className="flex flex-wrap gap-4 pt-2">
-              <Link
-                href="/zeroshot"
-                className="inline-flex items-center gap-2 rounded-md bg-teal-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-teal-500"
-              >
-                Learn More
-                <ArrowRight size={14} aria-hidden="true" />
-              </Link>
-            </div>
           </motion.div>
 
           <motion.div

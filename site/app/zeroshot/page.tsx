@@ -13,8 +13,8 @@ export default function ZeroShotPage() {
     <>
       <Nav />
       <main className="site-main">
-        <ZeroShotContent />
         <HomeHero />
+        <ZeroShotContent />
       </main>
       <Footer />
     </>

@@ -5,12 +5,13 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Mail, Phone } from "lucide-react";
+import { Mail } from "lucide-react";
 import SectionWrapper from "@/components/ui/SectionWrapper";
 import Button from "@/components/ui/Button";
 import { FormInput, FormTextarea } from "@/components/ui/FormInput";
 import { fadeUp, staggerContainer, viewportOptions } from "@/lib/motion";
-import { submitContact } from "@/lib/contact";
+import { useSubmit } from "@formspree/react";
+import { isSubmissionError } from "@formspree/core";
 
 const schema = z.object({
   name: z.string().min(2, "Enter your name"),
@@ -20,6 +21,12 @@ const schema = z.object({
 });
 
 type FormData = z.infer<typeof schema>;
+
+const formFieldSet = new Set<keyof FormData>(["name", "email", "affiliation", "message"]);
+
+function isFormField(field: string): field is keyof FormData {
+  return formFieldSet.has(field as keyof FormData);
+}
 
 export default function Contact() {
   const prefersReducedMotion = useReducedMotion();
@@ -32,16 +39,47 @@ export default function Contact() {
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
+    clearErrors,
+    setError,
   } = useForm<FormData>({ resolver: zodResolver(schema) });
+
+  const submitToFormspree = useSubmit<FormData>("contact");
 
   async function onSubmit(data: FormData) {
     setSubmitError("");
+
+    // Clear previous server-side field errors before a fresh submission.
+    clearErrors();
+
     try {
-      await submitContact({ type: "investor", ...data });
+      const result = await submitToFormspree(data);
+
+      if (isSubmissionError(result)) {
+        const formErrors = result.getFormErrors();
+        if (formErrors.length > 0) {
+          setSubmitError(formErrors.map((e) => e.message).join(" "));
+        }
+
+        for (const [field, fieldErrors] of result.getAllFieldErrors()) {
+          if (!isFormField(field)) {
+            continue;
+          }
+
+          setError(field, {
+            type: "server",
+            message: fieldErrors.map((e) => e.message).join(", "),
+          });
+        }
+
+        return;
+      }
+
       setSubmitted(true);
       reset();
     } catch {
-      setSubmitError("Form is unavailable right now. Please reach out to contact@aretexlabs.com");
+      setSubmitError((prev) =>
+        prev || "Form is unavailable right now. Please reach out to sales@aretexlabs.com",
+      );
     }
   }
 
@@ -59,13 +97,6 @@ export default function Contact() {
           <p className="text-xs font-mono text-teal-500 uppercase tracking-widest mb-4">
             Contact
           </p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight tracking-tight">
-            Get in touch.
-          </h2>
-          <p className="mt-6 text-base text-gray-600 dark:text-gray-400 leading-relaxed">
-            Have a question or want to connect? Reach out to us and we'll get back
-            to you as soon as possible.
-          </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
@@ -74,46 +105,30 @@ export default function Contact() {
             variants={animate ? fadeUp : {}}
             className="flex flex-col gap-8"
           >
+            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight tracking-tight">
+              Get in touch.
+            </h2>
+            <p className="mt-6 text-base text-gray-600 dark:text-gray-400 leading-relaxed">
+              Have a question or want to connect? Reach out to us and we'll get back
+              to you as soon as possible.
+            </p>
             <div className="flex flex-col gap-5">
               <div className="flex items-center gap-4">
                 <div className="w-9 h-9 rounded-md border border-teal-600/30 bg-teal-600/5 flex items-center justify-center shrink-0">
                   <Mail size={16} className="text-teal-400" aria-hidden="true" />
                 </div>
                 <div>
-                  {/* <p className="text-xs font-mono text-gray-500 uppercase tracking-wider mb-1">
-                    Email
-                  </p> */}
                   <a
                     href="mailto:sales@aretexlabs.com"
                     className="text-sm text-gray-900 dark:text-white hover:text-teal-400 transition-colors"
                   >
                     sales@aretexlabs.com
                   </a>
-                  {/* <p className="text-xs text-gray-500 mt-0.5">
-                    [Placeholder — email in setup]
-                  </p> */}
                 </div>
               </div>
-
-              {/* <div className="flex items-start gap-4">
-                <div className="w-9 h-9 rounded-md border border-teal-600/30 bg-teal-600/5 flex items-center justify-center shrink-0">
-                  <Phone size={16} className="text-teal-400" aria-hidden="true" />
-                </div>
-                <div>
-                  <a
-                    href="tel:+10000000000"
-                    className="text-sm text-gray-900 dark:text-white hover:text-teal-400 transition-colors"
-                  >
-                    coming soon
-                  </a>
-                </div>
-              </div> */}
             </div>
 
             <div className="border-t border-gray-200 dark:border-gray-800 pt-6">
-              {/* <p className="text-xs font-mono text-gray-500 uppercase tracking-wider mb-3">
-                Location
-              </p> */}
               <p className="text-sm text-gray-900 dark:text-gray-300">
                 Aretex Labs, LLC
               </p>

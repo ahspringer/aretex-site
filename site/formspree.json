@@ -1,0 +1,19 @@
+{
+  "forms": {
+    "contact": {
+      "name": "Contact Form",
+      "fields": {
+        "name": { "type": "text", "required": true, "minlength": 2 },
+        "email": { "type": "email", "required": true },
+        "affiliation": { "type": "text" , "required": false },
+        "message": { "type": "text" , "required": false}
+      },
+      "actions": [
+        {
+          "type": "email",
+          "to": "sales@aretexlabs.com"
+        }
+      ]
+    }
+  }
+}
