@@ -8,7 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Button from "@/components/ui/Button";
 import { FormInput } from "@/components/ui/FormInput";
 import { fadeUp, staggerContainer, viewportOptions } from "@/lib/motion";
-import { submitContact } from "@/lib/contact";
+import { useSubmit } from "@formspree/react";
+import { isSubmissionError } from "@formspree/core";
 
 const engineeringContactSchema = z.object({
   email: z.string().email("Enter a valid email address"),
@@ -27,15 +28,44 @@ export default function EngineeringContact() {
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
+    clearErrors,
+    setError,
   } = useForm<EngineeringContactFormData>({
     resolver: zodResolver(engineeringContactSchema),
     defaultValues: { email: "" },
   });
 
+  const submitToFormspree = useSubmit<EngineeringContactFormData>("engineering-contact");
+
   async function onSubmit(data: EngineeringContactFormData) {
     setSubmitError("");
+
+    // Clear previous server-side field errors before a fresh submission.
+    clearErrors();
+
     try {
-      await submitContact({ type: "engineering", email: data.email });
+      const result = await submitToFormspree(data);
+
+      if (isSubmissionError(result)) {
+        const formErrors = result.getFormErrors();
+        if (formErrors.length > 0) {
+          setSubmitError(formErrors.map((e) => e.message).join(" "));
+        }
+
+        for (const [field, fieldErrors] of result.getAllFieldErrors()) {
+          if (field !== "email") {
+            continue;
+          }
+
+          setError("email", {
+            type: "server",
+            message: fieldErrors.map((e) => e.message).join(", "),
+          });
+        }
+
+        return;
+      }
+
       setSubmitted(true);
       reset();
     } catch {
@@ -59,7 +89,7 @@ export default function EngineeringContact() {
         >
           <motion.div variants={animate ? fadeUp : {}} className="max-w-2xl">
             <p className="text-xs font-mono text-copper-light uppercase tracking-[0.3em] mb-4">
-              Build with us
+              Let's build the future together
             </p>
             {/* <h2
               id="engineering-contact-heading"

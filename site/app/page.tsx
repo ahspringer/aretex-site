@@ -17,8 +17,8 @@ export default function Home() {
       <Nav />
       <main className="site-main">
         <DesignIt />
-        <PerfectIt />
         <BuildIt />
+        <PerfectIt />
         <EngineeringContact />
       </main>
       <Footer />
