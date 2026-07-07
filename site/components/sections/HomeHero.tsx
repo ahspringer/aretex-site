@@ -69,8 +69,7 @@ export default function HomeHero() {
             </h1>
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-3xl">
               We need your help defining the future of ZeroShot. Send an email to <Link href="mailto:contact@aretexlabs.com" className="text-teal-400">contact@aretexlabs.com</Link> to provide 
-              feedback and be entered to win a free kit when we launch. Don't feel like contacting us but 
-              want to remain in the loop? Join our early access list and be the first to know when we launch.
+              feedback and be entered to win a free kit when we launch.
             </p>
           </motion.div>
 
