@@ -9,17 +9,38 @@ import SectionWrapper from "@/components/ui/SectionWrapper";
 import Button from "@/components/ui/Button";
 import { FormInput, FormTextarea } from "@/components/ui/FormInput";
 import { fadeUp, staggerContainer, viewportOptions } from "@/lib/motion";
-import { submitContact } from "@/lib/contact";
+import { useSubmit } from "@formspree/react";
+import { isSubmissionError } from "@formspree/core";
 
 const investorSchema = z.object({
   name: z.string().min(2, "Enter your name"),
   email: z.string().email("Enter a valid email address"),
   affiliation: z.string().optional(),
   investorType: z.string().optional(),
-  message: z.string().min(20, "Share a bit more about your interest"),
+  message: z.string().optional(),
 });
 
 type InvestorFormData = z.infer<typeof investorSchema>;
+
+type InvestorSubmissionData = {
+  name: string;
+  email: string;
+  affiliation?: string;
+  "investor-type"?: string;
+  message?: string;
+};
+
+function mapFormspreeField(field: string): keyof InvestorFormData | null {
+  if (field === "investor-type") {
+    return "investorType";
+  }
+
+  if (field === "name" || field === "email" || field === "affiliation" || field === "message") {
+    return field;
+  }
+
+  return null;
+}
 
 export default function Investors() {
   const prefersReducedMotion = useReducedMotion();
@@ -32,15 +53,53 @@ export default function Investors() {
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
+    clearErrors,
+    setError,
   } = useForm<InvestorFormData>({
     resolver: zodResolver(investorSchema),
     defaultValues: { investorType: "" },
   });
 
+  const submitToFormspree = useSubmit<InvestorSubmissionData>("investor-contact");
+
   async function onSubmit(data: InvestorFormData) {
     setSubmitError("");
+
+    // Clear previous server-side field errors before a fresh submission.
+    clearErrors();
+
+    const payload: InvestorSubmissionData = {
+      name: data.name,
+      email: data.email,
+      affiliation: data.affiliation,
+      "investor-type": data.investorType,
+      message: data.message,
+    };
+
     try {
-      await submitContact({ type: "investor", ...data });
+      const result = await submitToFormspree(payload);
+
+      if (isSubmissionError(result)) {
+        const formErrors = result.getFormErrors();
+        if (formErrors.length > 0) {
+          setSubmitError(formErrors.map((e) => e.message).join(" "));
+        }
+
+        for (const [field, fieldErrors] of result.getAllFieldErrors()) {
+          const mappedField = mapFormspreeField(field);
+          if (!mappedField) {
+            continue;
+          }
+
+          setError(mappedField, {
+            type: "server",
+            message: fieldErrors.map((e) => e.message).join(", "),
+          });
+        }
+
+        return;
+      }
+
       setSubmitted(true);
       reset();
     } catch {
@@ -55,40 +114,31 @@ export default function Investors() {
         whileInView="visible"
         viewport={viewportOptions}
         variants={animate ? staggerContainer : {}}
-        className="flex flex-col gap-10"
+        className="flex flex-col gap-16"
       >
         <motion.div variants={animate ? fadeUp : {}} className="max-w-2xl">
           <p className="text-xs font-mono text-teal-500 uppercase tracking-widest mb-4">
             Investors
           </p>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white leading-tight tracking-tight">
-            We&apos;re not actively raising.
-          </h2>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white leading-tight tracking-tight">
-            <span className="text-teal-400">Yet.</span>
-          </h2>
-          <p className="mt-6 text-base text-gray-400 leading-relaxed">
-            Aretex Labs is currently focused on product development ahead of our
-            next funding round. Wait-list members will be notified before the
-            round opens publicly. Early-access investors secure preferred terms
-            and priority allocation.
-          </p>
         </motion.div>
 
-        <motion.div variants={animate ? fadeUp : {}} className="max-w-4xl">
-          <p className="text-xs font-mono text-teal-500 uppercase tracking-widest">
-            Investor Contact
-          </p>
-          <p className="mt-4 text-sm text-gray-400 leading-relaxed max-w-2xl">
-            Interested in learning more or staying in the loop? Join the wait
-            list and we&apos;ll reach out directly before the round opens &mdash;
-            with full round materials ahead of public release.
-          </p>
-          <p className="mt-4 text-[11px] font-mono text-gray-500 uppercase tracking-[0.25em]">
-            invest@aretexlabs.com
-          </p>
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+          <motion.div variants={animate ? fadeUp : {}} className="flex flex-col gap-8">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight tracking-tight">
+              We&apos;re not actively raising.
+            </h2>
+            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl">
+              Interested in learning more or staying in the loop? Join the wait
+              list and we&apos;ll reach out directly before the round opens &mdash;
+              with full round materials ahead of public release.
+            </p>
+            <p className="text-[11px] font-mono text-gray-500 uppercase tracking-[0.25em]">
+              invest@aretexlabs.com
+            </p>
+          </motion.div>
 
-          <div className="mt-8 border-t border-white/10 pt-8">
+          <motion.div variants={animate ? fadeUp : {}} className="flex flex-col gap-8">
+          
             {submitted ? (
               <div className="flex flex-col items-center justify-center gap-4 py-12 text-center">
                 <div className="w-12 h-12 rounded-full bg-teal-600/10 border border-teal-600/30 flex items-center justify-center">
@@ -107,8 +157,8 @@ export default function Investors() {
                     />
                   </svg>
                 </div>
-                <p className="text-lg font-bold text-white">You&apos;re on the list.</p>
-                <p className="text-sm text-gray-400 max-w-sm">
+                <p className="text-lg font-bold text-gray-900 dark:text-white">You&apos;re on the list.</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 max-w-sm">
                   We&apos;ll reach out before the next round opens.
                 </p>
                 <button
@@ -124,8 +174,8 @@ export default function Investors() {
                   <p className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-2">
                     Early-Access Wait List
                   </p>
-                  <h3 className="text-2xl font-bold text-white">Don&apos;t miss our next round</h3>
-                  <p className="mt-2 text-sm text-gray-400 leading-relaxed">
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Don&apos;t miss our next round</h3>
+                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                     Investors on the list get first look when our next round opens.
                   </p>
                 </div>
@@ -183,8 +233,8 @@ export default function Investors() {
                 </div>
               </form>
             )}
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </motion.div>
     </SectionWrapper>
   );

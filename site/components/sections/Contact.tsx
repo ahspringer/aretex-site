@@ -96,7 +96,7 @@ export default function Contact() {
         <motion.div variants={animate ? fadeUp : {}} className="max-w-2xl">
           <p className="text-xs font-mono text-teal-500 uppercase tracking-widest mb-4">
             Contact
-          </p>
+          </p> 
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">

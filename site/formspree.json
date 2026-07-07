@@ -26,6 +26,22 @@
           "to": "sales@aretexlabs.com"
         }
       ]
+    },
+    "investor-contact": {
+      "name": "Investor Contact Form",
+      "fields": {
+        "name": { "type": "text", "required": true, "minlength": 2 },
+        "email": { "type": "email", "required": true },
+        "affiliation" : { "type": "text", "required": false },
+        "investor-type": { "type": "text", "required": false },
+        "message": { "type": "text", "required": false }
+      },
+      "actions": [
+        {
+          "type": "email",
+          "to": "alex.springer@aretexlabs.com"
+        }
+      ]
     }
   }
 }
