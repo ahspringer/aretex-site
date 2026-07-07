@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
 import FormspreeProviders from "@/components/FormspreeProvider";
+import ZeroShotFeedbackPopup from "@/components/ZeroShotFeedbackPopup";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -59,6 +60,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col site-shell">
         <ThemeProvider>
           <FormspreeProviders>
+            <ZeroShotFeedbackPopup />
             {children}
           </FormspreeProviders>
         </ThemeProvider>

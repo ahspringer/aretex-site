@@ -42,6 +42,18 @@
           "to": "alex.springer@aretexlabs.com"
         }
       ]
+    },
+    "zeroshot-contact": {
+      "name": "ZeroShot Contact Form",
+      "fields": {
+        "email": { "type": "email", "required": true }
+      },
+      "actions": [
+        {
+          "type": "email",
+          "to": "sales@aretexlabs.com"
+        }
+      ]
     }
   }
 }
