@@ -146,6 +146,7 @@ export default function DesignIt() {
                     : "border-white/12 bg-white/[0.03] text-gray-300 hover:border-teal-400/40 hover:text-gray-100"
                 }`}
                 aria-pressed={activeMediaId === item.id}
+                disabled
               >
                 {item.label}
               </button>

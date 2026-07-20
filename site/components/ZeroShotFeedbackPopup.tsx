@@ -140,16 +140,16 @@ export default function ZeroShotFeedbackPopup() {
             <h2 id="zeroshot-popup-title" className="text-3xl md:text-4xl font-extrabold text-white leading-tight tracking-tight">
               Help us shape the future of precision shooting.
             </h2>
-            <div className="overflow-hidden rounded-xl border border-white/10">
+            {/* <div className="overflow-hidden rounded-xl border border-white/10">
               <Image
-                src="/images/pop-up_zeroshot.png"
+                src="/images/3D_rendering_mounted.png"
                 alt="ZeroShot VR promotional preview"
                 width={1400}
                 height={700}
                 className="h-auto w-full object-cover"
                 priority
               />
-            </div>
+            </div> */}
             <p className="text-sm md:text-base text-gray-300 leading-relaxed">
               We need your help defining the future of ZeroShot. Share your email to give feedback, collaborate with the team, and enter for a chance to win a free ZeroShot VR kit when we launch.
             </p>
