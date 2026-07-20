@@ -44,7 +44,7 @@ export default function Footer() {
               Alabama, United States
             </span>
             <span className="text-xs font-mono text-gray-400 uppercase tracking-widest">
-              UEI: {samUei}
+              SAM & DUNS Registered
             </span>
             {/* <span className="text-xs font-mono text-gray-400 uppercase tracking-widest">
               CAGE: {CAGECode}
